@@ -36,7 +36,17 @@
             <?php
             $selected_active = '';
             $selected_disabled = '';
-            if (isset($_POST['status'])) {
+            if (isset($category)){
+                switch ($category['status']){
+                    case 0:
+                        $selected_disabled = 'selected';
+                        break;
+                    case 1:
+                        $selected_active = 'selected';
+                        break;
+                }
+            }
+            else if (isset($_POST['status'])) {
                 switch ($_POST['status']) {
                     case 0:
                       $selected_disabled = 'selected';

@@ -15,7 +15,7 @@
     <div class="form-group">
         <label>Mô tả</label>
         <textarea class="form-control"
-                  name="description"><?php echo isset($_POST['description']) ? $_POST['description'] : ''; ?></textarea>
+                  name="description"> <?php echo isset($_POST['description']) ? $_POST['description'] : ''; ?></textarea>
     </div>
 
     <div class="form-group">  

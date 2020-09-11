@@ -87,12 +87,12 @@ class CategoryController extends Controller {
 
                 $category_model = new Category();
 
-                $category_model->title = $title;
-                $category_model->avatar = $avatar;
-                $category_model->parent_id = $parent_id;
-                $category_model->description = $description;
-                $category_model->status = $status;
-
+                $category_model->setTitle($title);
+                $category_model->setStatus($status);
+                $category_model->setDescription($description); 
+                $category_model->setAvatar($avatar);
+                $category_model->setParent_id($parent_id);
+  
                 $is_insert = $category_model->insert();
 
                 if ($is_insert){
@@ -146,12 +146,12 @@ class CategoryController extends Controller {
                     move_uploaded_file($avatar_files['tmp_name'],$dir_uploads . '/' . $avatar);
                 }
 
-                $category_model->title = $title;
-                $category_model->status = $status;
-                $category_model->description = $description;
-                $category_model->avatar = $avatar;
-                $category_model->parent_id = $parent_id;
-                $category_model->updated_at = date('Y-m-d H:i:s');
+                $category_model->setTitle($title);
+                $category_model->setStatus($status);
+                $category_model->setDescription($description); 
+                $category_model->setAvatar($avatar);
+                $category_model->setParent_id($parent_id);
+                $category_model->setUpdated_at(date('Y-m-d H:i:s'));
 
                 $is_update = $category_model->updateOne($id);
                 

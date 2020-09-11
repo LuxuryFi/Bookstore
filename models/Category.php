@@ -2,14 +2,75 @@
 require_once 'models/Model.php';
 
 class Category extends Model {
-    public $id;
-    public $avatar;
-    public $title;
-    public $parent_id;
-    public $description;
-    public $status;
-    public $created_at;
-    public $updated_at;
+    private $id;
+    private $avatar;
+    private $title;
+    private $parent_id;
+    private $description;
+    private $status;
+    private $created_at;
+    private $updated_at;
+
+    public function getId(){
+        return $this->id;
+    }
+
+    public function getTitle(){
+        return $this->title;
+    }
+
+    public function getAvatar(){
+        return $this->avatar;
+    }
+
+    public function getDescription(){
+        return $this->description;
+    }
+
+    public function getParent_id(){
+        return $this->parent_id;
+    }
+
+    public function getCreated_at(){
+        return $this->created_at;
+    }
+    public function getUpdated_at(){
+        return $this->updated_at;
+    }
+
+    public function setId($id){
+        $this->id = $id;
+    }
+
+    public function setTitle($title){
+        $this->title = $title;
+    }
+
+    public function setDescription($description){
+        $this->description = $description;
+    }
+
+    public function setStatus($status){
+        $this->status = $status;
+    }
+
+    public function setUpdated_at($updated_at){
+        $this->updated_at = $updated_at;
+    }
+
+    public function setParent_id($parent_id){
+        $this->parent_id = $parent_id;
+    }
+
+    public function setCreated_at($created_at){
+        $this->created_at = $created_at;
+    }
+
+    public function setAvatar($avatar){
+        $this->avatar = $avatar;
+    }
+
+
 
     public function insert(){
         $sql_insert = "INSERT into categories (title, avatar,`description`, `status`, parent_id) 

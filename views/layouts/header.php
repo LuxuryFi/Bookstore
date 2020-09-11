@@ -91,13 +91,29 @@ if (isset($_SESSION['user'])) {
                 <a href="index.php?controller=product&action=index">
                     <i class="fa fa-code"></i> <span>Quản lý sản phẩm</span>
                     <span class="pull-right-container">
+              <!-- <small class="label pull-right bg-green">new</small> -->
+            </span>
+                </a>
+            </li>
+            <li>
+                <a href="index.php?controller=tag&action=index">
+                    <i class="fa fa-tag"></i> <span>Quản lý Tag</span>
+                    <span class="pull-right-container">
+              <!--<small class="label pull-right bg-green">new</small>-->
+            </span>
+                </a>
+            </li>
+            <li>
+                <a href="index.php?controller=author&action=index">
+                    <i class="fa fa-user"></i> <span>Quản tac gia</span>
+                    <span class="pull-right-container">
               <!--<small class="label pull-right bg-green">new</small>-->
             </span>
                 </a>
             </li>
             <li>
                 <a href="index.php?controller=user&action=index">
-                    <i class="fa fa-user"></i> <span>Quản lý user</span>
+                    <i class="fa fa-user"></i> <span>Quản lý tac gia</span>
                     <span class="pull-right-container">
               <!--<small class="label pull-right bg-green">new</small>-->
             </span>

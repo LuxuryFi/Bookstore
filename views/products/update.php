@@ -1,4 +1,4 @@
-<h2>Cập nhật sản phẩm</h2>
+<h2>Chỉnh sửa danh mục #<?php $tag['id'] ?></h2>
 <form action="" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="category_id">Chọn danh mục</label>
