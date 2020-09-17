@@ -40,11 +40,10 @@ class Pagination {
 
         if($current_page >= 2){
             $controller = $this->params['controller'];
-            $action = $this->params['action'];
-            $page = $current_page -1 ;
-            $prev_url = 
-            "index.php?controller=$controller&action=$action&page=$page";
-            $prev_page = "<li><a href='$prev_url'>Prev</a></li>";
+            $action     = $this->params['action'];
+            $page       = $current_page -1 ;
+            $prev_url   = "index.php?controller=$controller&action=$action&page=$page";
+            $prev_page  = "<li><a href='$prev_url'>Prev</a></li>";
         }
         return $prev_page;
     }
@@ -69,15 +68,15 @@ class Pagination {
             return '';
         }
 
-        $data .= "<ul class='pagination'>";
+        $data       .= "<ul class='pagination'>";
 
-        $pre_link = $this->getPrevPage();
-        $data .= $pre_link;
+        $pre_link    = $this->getPrevPage();
+        $data       .= $pre_link;
 
-        $controller = $this->params['controller'];
-        $action = $this->params['action'];
+        $controller  = $this->params['controller'];
+        $action      = $this->params['action'];
 
-        $full_mode = $this->params['full_mode'];
+        $full_mode   = $this->params['full_mode'];
 
         if ($this->params['full_mode'] == FALSE){
             for ($page = 1; $page <= $total_page; $page++){

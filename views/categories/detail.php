@@ -7,7 +7,7 @@
     </tr>
     <tr>
         <th>Name</th>
-        <td><?php echo $category['name']; ?></td>
+        <td><?php echo $category['title']; ?></td>
     </tr>
     <tr>
         <th>Avatar</th>
@@ -46,5 +46,6 @@
         </td>
     </tr>
 </table>
-<a class="btn btn-primary" href="index.php?controller=category">Back</a>
+<a class="btn btn-primary" href="index.php?controller=category">Trở lại trang chính</a>
+<a class="btn btn-secondary" href="index.php?controller=category&action=update&id=<?php echo $category['id']; ?>">Cập nhật thông tin</a>
 

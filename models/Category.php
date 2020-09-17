@@ -31,6 +31,10 @@ class Category extends Model {
         return $this->parent_id;
     }
 
+    public function getStatus(){
+        return $this->status;
+    }
+
     public function getCreated_at(){
         return $this->created_at;
     }

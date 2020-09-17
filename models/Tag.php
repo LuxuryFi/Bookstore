@@ -1,7 +1,8 @@
 <?php
 require_once "models/Model.php";
 
-class Tag extends Model {
+class Tag extends Model
+{
     private $id;
     private $title;
     private $description;
@@ -9,50 +10,62 @@ class Tag extends Model {
     private $updated_at;
     private $status;
 
-    public function getId(){
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function getTitle(){
+    public function getTitle()
+    {
         return $this->title;
     }
 
-    public function getDescription(){
+    public function getDescription()
+    {
         return $this->description;
     }
 
-    public function getCreated_at(){
+    public function getCreated_at()
+    {
         return $this->created_at;
     }
-    public function getUpdated_at(){
+    public function getUpdated_at()
+    {
         return $this->updated_at;
     }
 
-    public function setId($id){
+    public function setId($id)
+    {
         $this->id = $id;
     }
 
-    public function setTitle($title){
+    public function setTitle($title)
+    {
         $this->title = $title;
     }
 
-    public function setDescription($description){
+    public function setDescription($description)
+    {
         $this->description = $description;
     }
 
-    public function setStatus($status){
+    public function setStatus($status)
+    {
         $this->status = $status;
     }
 
-    public function setUpdated_at($updated_at){
+    public function setUpdated_at($updated_at)
+    {
         $this->updated_at = $updated_at;
     }
 
-    public function setCreated_at($created_at){
+    public function setCreated_at($created_at)
+    {
         $this->created_at = $created_at;
     }
 
-    public function create(){
+    public function create()
+    {
         $sql_insert = "INSERT INTO tags (title,`description`,`status`) VALUES (:title, :description, :status); ";
 
         $arr_insert = [
@@ -68,14 +81,16 @@ class Tag extends Model {
         return $is_insert;
     }
 
-    public function countTotal(){
+    public function countTotal()
+    {
         $obj_select = $this->connection->prepare("SELECT COUNT(id) from tags;");
         $obj_select->execute();
 
         return $obj_select->fetchColumn();
     }
 
-    public function getAllPagination($params = []){
+    public function getAllPagination($params = [])
+    {
         $limit = $params['limit'];
         $page = $params['page'];
 
@@ -90,10 +105,10 @@ class Tag extends Model {
         $tags = $obj_select->fetchAll(PDO::FETCH_ASSOC);
 
         return $tags;
-
     }
 
-    public function deleteOne(){
+    public function deleteOne()
+    {
         $sql_delete = "DELETE FROM tags WHERE id = :id";
 
         $arr_delete = [
@@ -107,7 +122,8 @@ class Tag extends Model {
         return $is_delete;
     }
 
-    public function getOne(){
+    public function getOne()
+    {
         $sql_select_one = "SELECT * FROM tags WHERE id = :id";
         $arr_select = [
             ':id' => $this->id
@@ -122,7 +138,20 @@ class Tag extends Model {
         return $tag;
     }
 
-    public function updateOne(){
+    public function getAll(){
+        $sql_select_all = "SELECT * FROM tags";
+
+        $obj_select_all = $this->connection->prepare($sql_select_all);
+
+        $obj_select_all->execute();
+
+        $tags = $obj_select_all->fetchAll(PDO::FETCH_ASSOC);
+
+        return $tags;
+    }
+
+    public function updateOne()
+    {
         $sql_update_one = "UPDATE tags SET 
         title = :title,
         description = :description,
@@ -131,11 +160,11 @@ class Tag extends Model {
         WHERE id = :id";
 
         $arr_update = [
-            ':title' => $this->title,
-            ':description' => $this->description,
-            ':status' => $this->status,
-            ':updated_at' => $this->updated_at,
-            ':id' => $this->id
+            ':title'         => $this->title,
+            ':description'   => $this->description,
+            ':status'        => $this->status,
+            ':updated_at'    => $this->updated_at,
+            ':id'            => $this->id
         ];
 
         $obj_update = $this->connection->prepare($sql_update_one);
@@ -143,10 +172,5 @@ class Tag extends Model {
         $is_update = $obj_update->execute($arr_update);
 
         return $is_update;
-
-
     }
-    
 }
-
-?>

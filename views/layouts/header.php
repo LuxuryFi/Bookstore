@@ -78,15 +78,6 @@ if (isset($_SESSION['user'])) {
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">LAOYOUT ADMIN</li>
-
-            <li>
-                <a href="index.php?controller=category&action=index">
-                    <i class="fa fa-th"></i> <span>Quản lý danh mục</span>
-                    <span class="pull-right-container">
-              <!--<small class="label pull-right bg-green">new</small>-->
-            </span>
-                </a>
-            </li>
             <li>
                 <a href="index.php?controller=product&action=index">
                     <i class="fa fa-code"></i> <span>Quản lý sản phẩm</span>
@@ -96,8 +87,25 @@ if (isset($_SESSION['user'])) {
                 </a>
             </li>
             <li>
+                <a href="index.php?controller=order&action=index">
+                    <i class="fa fa-bars"></i> <span>Quản lý đơn hàng</span>
+                    <span class="pull-right-container">
+              <!--<small class="label pull-right bg-green">new</small>-->
+            </span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="index.php?controller=category&action=index">
+                    <i class="fa fa-th"></i> <span>Quản lý danh mục</span>
+                    <span class="pull-right-container">
+              <!--<small class="label pull-right bg-green">new</small>-->
+            </span>
+                </a>
+            </li>
+            <li>
                 <a href="index.php?controller=tag&action=index">
-                    <i class="fa fa-tag"></i> <span>Quản lý Tag</span>
+                    <i class="fa fa-tags"></i> <span>Quản lý thẻ</span>
                     <span class="pull-right-container">
               <!--<small class="label pull-right bg-green">new</small>-->
             </span>
@@ -105,20 +113,37 @@ if (isset($_SESSION['user'])) {
             </li>
             <li>
                 <a href="index.php?controller=author&action=index">
-                    <i class="fa fa-user"></i> <span>Quản tac gia</span>
+                    <i class="fa fa-users"></i> <span>Quản tác giả</span>
                     <span class="pull-right-container">
               <!--<small class="label pull-right bg-green">new</small>-->
             </span>
                 </a>
             </li>
             <li>
-                <a href="index.php?controller=user&action=index">
-                    <i class="fa fa-user"></i> <span>Quản lý tac gia</span>
+                <a href="index.php?controller=publisher&action=index">
+                    <i class="fa fa-user-circle"></i> <span>Quản lý nhà xuất bản</span>
                     <span class="pull-right-container">
               <!--<small class="label pull-right bg-green">new</small>-->
             </span>
                 </a>
             </li>
+            <li>
+                <a href="index.php?controller=supplier&action=index">
+                    <i class="fa fa-user-md"></i> <span>Quản lý nhà phân phối</span>
+                    <span class="pull-right-container">
+              <!--<small class="label pull-right bg-green">new</small>-->
+            </span>
+                </a>
+            </li>
+            <li>
+                <a href="index.php?controller=type&action=index">
+                    <i class="fa fa-hashtag"></i> <span>Quản lý loại</span>
+                    <span class="pull-right-container">
+              <!--<small class="label pull-right bg-green">new</small>-->
+            </span>
+                </a>
+            </li>
+            
         </ul>
     </section>
     <!-- /.sidebar -->

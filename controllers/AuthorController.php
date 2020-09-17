@@ -90,8 +90,7 @@ class AuthorController extends Controller {
                     exit();
                 }
                 else {
-                    // $_SESSION['error'] = "Thêm mới thất bại";
-                    
+                    $_SESSION['error'] = "Thêm mới thất bại";    
                  }
             }
 
@@ -185,8 +184,20 @@ class AuthorController extends Controller {
     }
 
     public function detail(){
+        $author_model = new Author();
+        $id = $_GET['id'];
 
+        $author_model->setId($id);
+        $author = $author_model->getOne();
+
+        $this->content = $this->render('views/authors/detail.php',[
+            'author' => $author
+        ]);
+
+        require_once 'views/layouts/main.php';
     }
+
+    
     
 }
 

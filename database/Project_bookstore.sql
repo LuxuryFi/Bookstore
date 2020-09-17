@@ -18,10 +18,14 @@ create table publishers
 (
 	id int(11) auto_increment,
     title varchar(255) not null,
+    avatar varchar(255),
     description text,
 	created_at timestamp default current_timestamp,
     updated_at  datetime,
     status bool,
+    phone int(12),
+    address varchar(255),
+    email varchar(255),
     primary key (id)
 );
 -- 4. suppliers 
@@ -33,6 +37,9 @@ create table suppliers
     created_at timestamp default current_timestamp,
     updated_at   datetime,
     status bool,
+    phone int(12),
+    address varchar(255),
+    email varchar(255),
     primary key (id)
 );
 

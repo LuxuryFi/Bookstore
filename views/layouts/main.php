@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="assets/css/all.min.css">
     <link rel="stylesheet" href="assets/css/AdminLTE.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/mdb.lite.min.css">
+    <link rel="stylesheet" href="assets/css/mdb.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="assets/css/_all-skins.min.css">
@@ -49,11 +51,20 @@
 <script src="assets/js/jquery-ui.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="assets/js/bootstrap.min.js"></script>
+<!-- MDBoostrap -->
+<script src="assets/js/mdb.min.js"></script>
 <!-- AdminLTE App -->
 <script src="assets/js/adminlte.min.js"></script>
+<!-- Popper -->
+<script src="assets/js/popper.min.js"></script>
 <!--CKEditor -->
 <script src="assets/ckeditor/ckeditor.js"></script>
+<!-- Country-Validate -->
+<link rel="stylesheet" href="path/to/intlTelInput.css">
 <!--My SCRIPT-->
+
+
 <script src="assets/js/script.js"></script>
+
 </body>
 </html>

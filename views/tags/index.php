@@ -12,7 +12,7 @@
     </div>
 </form>
 
-<h1>Danh sách tag</h1>
+<h1>Danh sách thẻ</h1>
 <a href="index.php?controller=tag&action=create" class="btn btn-primary">
     <i class="fa fa-plus"></i> Thêm mới
 </a>

@@ -2,6 +2,8 @@
     require_once "configs/Database.php";
 
     class Model {
+
+
         public $connection;
 
         public function __construct()

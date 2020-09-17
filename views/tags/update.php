@@ -1,14 +1,14 @@
-<h2>Chính sửa thể</h2>
+<h2>Chính sửa thẻ</h2>
 <?php if(!empty($tag)) : ?>
 <form action="" method="POST">
     <div class="form-group">
         <label for="title">Tên thẻ</label>
-        <input type="text" name="title" id="title" value="<?php echo $tag['title'] ?>" class="form-control">
+        <input type="text" name="title" id="title" value="<?php echo isset($_POST['title']) ? $_POST['title'] : $tag['title'] ?>" class="form-control">
     </div>
     <div class="form-group">
         <label for="description">Mô tả</label>
         <textarea name="description" id="" cols="30" rows="10">
-            <?php echo $tag['description']; ?>
+            <?php echo isset($_POST['description']) ? $_POST['description'] : $tag['description']; ?>
         </textarea>
     </div>
     <div class="form-group">
@@ -45,7 +45,7 @@
     </div>
     <div class="from-group">
         <input type="submit" name="submit" class="btn btn-primary" value="Save">
-        <input type="reset" name="reset" class="btn btn-secondary" value="Reset">
+        <a href="index.php?controller=tag" class="btn btn-secondary">Trở lại trang chính</a>
     </div>
 </form>
 

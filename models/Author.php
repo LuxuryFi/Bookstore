@@ -141,8 +141,20 @@ class Author extends Model {
 
         return $author;
         
-      
     }
+
+    public function getAll(){
+        $sql_select_all = "SELECT * FROM authors";
+
+        $obj_select_all = $this->connection->prepare($sql_select_all);
+
+        $obj_select_all->execute();
+
+        $authors = $obj_select_all->fetchAll(PDO::FETCH_ASSOC);
+
+        return $authors;
+    }
+
 
     public function updateOne(){
         $sql_update_one = "UPDATE authors SET 

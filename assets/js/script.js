@@ -24,4 +24,15 @@ $(document).ready(function () {
     filebrowserUploadUrl: 'assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
   });
 
+  CKEDITOR.replace('content', {
+    filebrowserBrowseUrl: 'assets/ckfinder/ckfinder.html',
+    //đường dẫn đến file connector.php của ckfinder
+    filebrowserUploadUrl: 'assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
+  })
+
+
+
+  $('.file-upload').file_upload();
+  
+  $('.mdb-select').materialSelect();
 });

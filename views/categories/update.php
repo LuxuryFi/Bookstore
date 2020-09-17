@@ -63,8 +63,10 @@
                 <option value="1" <?php echo $selected_disabled ?> >Active</option>
             </select>
         </div>
-
-        <input type="submit" class="btn btn-primary" name="submit" value="Save"/>
-        <input type="reset" class="btn btn-secondary" name="submit" value="Reset"/>
+        <div class="form-group">
+             <input type="submit" class="btn btn-primary" name="submit" value="Save"/>
+             <a href="index.php?controller=category" class="btn btn-secondary">Trở lại trang chính</a>
+        </div>
+       
     </form>
 <?php endif; ?>

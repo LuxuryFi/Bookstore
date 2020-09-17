@@ -55,7 +55,7 @@
     </div>
     <div class="form-group">
         <input type="submit" name="submit" class="btn btn-primary">
-        <input type="reset" name="reset" class="btn btn-secondary">
+        <a href="index.php?controller=author" class="btn btn-secondary">Trở lại trang chính</a>
     </div>
 
 </form>

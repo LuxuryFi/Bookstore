@@ -191,6 +191,19 @@ class CategoryController extends Controller {
         }
     }
 
+    public function detail(){
+        $category_model = new Category();
+        $id = $_GET['id'];
+
+        $category = $category_model->getOne($id);
+
+        $this->content = $this->render('views/categories/detail.php',[
+            'category' => $category
+        ]);
+
+        require_once 'views/layouts/main.php';
+    }
+
 }
 
 ?>

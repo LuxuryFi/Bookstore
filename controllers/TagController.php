@@ -143,6 +143,21 @@
 
         }
 
+
+        public function detail(){
+            $tag_model = new Tag();
+            $id = $_GET['id'];
+    
+            $tag_model->setId($id);
+            $tag = $tag_model->getOne();
+    
+            $this->content = $this->render('views/tags/detail.php',[
+                'tag' => $tag
+            ]);
+    
+            require_once 'views/layouts/main.php';
+        }
+
     }
 
 ?>
