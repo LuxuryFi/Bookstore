@@ -162,6 +162,66 @@ class Product extends Model {
     }
 
 
+    public $str_search = '';
+
+    function __construct()
+    {
+        parent::__construct();
+
+        
+    }
+
+
+    public function getCount(){
+        $sql_get_count = "SELECT count(id) FROM products WHERE TRUE $this->str_search;";
+
+        $obj_get_count = $this->connection->prepare($sql_get_count);
+
+        $obj_get_count->execute();
+
+        $products = $obj_get_count->fetchColumn();
+
+        return $products;
+    }
+
+    public function getAllPagination($params){
+        $limit = $params['limit'];
+        $page = $params['page'];
+        $start = ($page - 1) * $limit;
+
+        $sql_select = "SELECT * FROM products LIMIT $start,$limit";
+
+        $obj_select = $this->connection->prepare($sql_select);
+
+        $obj_select->execute();
+
+        $products = $obj_select->fetchAll(PDO::FETCH_ASSOC);
+
+        return $products;
+    }
+
+    public function getOne(){
+
+        $sql_select_one = "SELECT products.*, a.title as author_title, s.title as supplier_title, p.title as publisher_title FROM products 
+        INNER JOIN authors a ON a.id = products.author_id
+        INNER JOIN suppliers s ON s.id = products.supplier_id
+        INNER JOIN publishers p ON p.id = products.publisher_id
+        AND products.id = :id";
+
+        $arr_select_one = [
+            ':id' => $this->id
+        ];
+
+        $obj_select_one = $this->connection->prepare($sql_select_one);
+
+        $obj_select_one->execute($arr_select_one);
+
+        $product = $obj_select_one->fetch(PDO::FETCH_ASSOC);
+
+        return $product;
+    }
+
+
     public function insert(){
         $sql_insert = "INSERT INTO products (title,avatar,price,amount,`description`,content,author_id,
         publisher_id,supplier_id,`type_id`,`status`,seo_title,seo_description,seo_keywords)  VALUES 
@@ -169,20 +229,20 @@ class Product extends Model {
         :publisher_id,:supplier_id,:type_id,:status,:seo_title,:seo_description,:seo_keywords);";
 
         $arr_insert = [
-            ':title' => $this->title,
-            ':avatar' => $this->avatar,
-            ':price' => $this->price,
-            ':amount' => $this->amount,
-            ':description' => $this->description,
-            ':content' => $this->content,
-            ':author_id' => $this->author_id,
-            ':publisher_id' => $this->publisher_id,
-            ':supplier_id' => $this->supplier_id,
-            ':type_id' => $this->type_id,
-            ':status' => $this->status,
-            ':seo_title' => $this->seo_title,
-            ':seo_description' => $this->description,
-            ':seo_keywords' => $this->seo_keywords
+            ':title'            => $this->title,
+            ':avatar'           => $this->avatar,
+            ':price'            => $this->price,
+            ':amount'           => $this->amount,
+            ':description'      => $this->description,
+            ':content'          => $this->content,
+            ':author_id'        => $this->author_id,
+            ':publisher_id'     => $this->publisher_id,
+            ':supplier_id'      => $this->supplier_id,
+            ':type_id'          => $this->type_id,
+            ':status'           => $this->status,
+            ':seo_title'        => $this->seo_title,
+            ':seo_description'  => $this->description,
+            ':seo_keywords'     => $this->seo_keywords
         ];
 
         $obj_insert = $this->connection->prepare($sql_insert);
@@ -194,6 +254,8 @@ class Product extends Model {
         return $product_id;
     }
 
+
+    
 
 
 }

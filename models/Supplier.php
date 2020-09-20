@@ -95,6 +95,19 @@ class Supplier extends Model {
         $this->updated_at = $updated_at;
     }
 
+
+    public $str_search = '';
+
+    function __construct()
+    {
+        parent::__construct();
+        if (isset($_GET['title']) || !empty($_GET['title'])){
+            $this->str_search .= "AND title LIKE '%{$_GET['title']}%'";
+        }
+    }
+
+
+
     public function insert(){
         $sql_insert = "INSERT INTO suppliers (title,`description`,phone,`address`,email,status,country)
         VALUES (:title,:description,:phone,:address,:email,:status,:country);";
@@ -199,7 +212,7 @@ class Supplier extends Model {
 
         $start = ($page - 1) * $limit;
 
-        $sql_select = "SELECT * FROM suppliers LIMIT $start,$limit";
+        $sql_select = "SELECT * FROM suppliers WHERE TRUE $this->str_search LIMIT $start,$limit";
 
         $obj_select = $this->connection->prepare($sql_select);
 
@@ -211,7 +224,7 @@ class Supplier extends Model {
     }
 
     public function countTotal(){
-        $sql_get_count = "SELECT COUNT(id) FROM suppliers";
+        $sql_get_count = "SELECT COUNT(id) FROM suppliers WHERE TRUE $this->str_search;";
 
         $obj_get_count = $this->connection->prepare($sql_get_count);
         

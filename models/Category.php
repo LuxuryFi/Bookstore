@@ -74,7 +74,15 @@ class Category extends Model {
         $this->avatar = $avatar;
     }
 
+    public $str_search = '';
 
+    function __construct()
+    {
+        parent::__construct();
+        if (isset($_GET['title']) && !empty($_GET['title'])) {
+            $this->str_search .= " AND title LIKE '%{$_GET['title']}%'";
+        }
+    }
 
     public function insert(){
         $sql_insert = "INSERT into categories (title, avatar,`description`, `status`, parent_id) 
@@ -112,7 +120,7 @@ class Category extends Model {
         $limit = $params['limit'];
         $page  = $params['page'];
         $start = ($page - 1) * $limit;
-        $object_select = $this->connection->prepare("SELECT * FROM categories LIMIT $start, $limit");
+        $object_select = $this->connection->prepare("SELECT * FROM categories  WHERE TRUE $this->str_search LIMIT $start, $limit");
 
         $object_select->execute();
 
@@ -122,7 +130,7 @@ class Category extends Model {
     }
 
     public function countTotal(){
-        $object_select = $this->connection->prepare("SELECT COUNT(id) FROM categories");
+        $object_select = $this->connection->prepare("SELECT COUNT(id) FROM categories WHERE TRUE $this->str_search");
         $object_select->execute();
 
         return $object_select->fetchColumn();

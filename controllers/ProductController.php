@@ -21,11 +21,110 @@ class ProductController extends Controller {
 
     public function index() {
 
+        $product_model = new Product();
+
+        $count_total = $product_model->getCount();
 
 
-        $this->content = $this->render('views/products/index.php');
+        $query_additional = '';
+        if (isset($_GET['title'])) {
+            $query_additional .= '&title=' . $_GET['title'];
+        }
+        if (isset($_GET['product_id'])) {
+            $query_additional .= '$product_id=' . $_GET['product_id'];
+        }
+
+        $params = [
+            'limit'         => 6,
+            'total'         => $count_total,
+            'action'        => 'index',
+            'controller'    => 'product',
+            'query_string'  => 'page',
+            'page'          => isset($_GET['page']) ? $_GET['page'] : 1,
+            'full_mode'     => FALSE
+        ];
+
+        $pagination = new Pagination($params);
+
+        $pages = $pagination->getPagination();
+
+        var_dump($count_total);
+
+        $products = $product_model->getAllPagination($params);
+
+
+       
+
+
+        $this->content = $this->render('views/products/index.php',[
+            'pages'     => $pages,
+            'products'  => $products
+        ]);
 
         require_once 'views/layouts/main.php';
+    }
+
+
+    public function update(){
+
+        $this->content = $this->render('views/products/update.php');
+
+        require_once 'views/layouts/main.php';
+    }
+
+    public function detail(){
+
+        $product_model = new Product();
+        
+        $product_id = $_GET['id'];
+        $product_model->setId($product_id);
+
+        $product = $product_model->getOne();
+
+        $product_tag_model = new Product_tag();
+        $product_tag_model->setProduct_id($product_id);
+        $tags = $product_tag_model->getAllTag();
+
+        $product_category_model = new Product_category();
+        $product_category_model->setProduct_id($product_id);
+        $categories = $product_category_model->getAllCategory();
+
+        $category = '';
+        $tag = '';
+
+        foreach ($tags as $item) {
+            if (empty($tag)){
+                $tag .= $item['title'];
+            }
+            else {
+                $tag .= ', ' . $item['title'];
+            }
+        }
+
+        foreach ($categories as $item) {
+            if (empty($category)){
+                $category .= $item['title'];
+            }
+            else {
+                $category .= ', ' . $item['title'];
+            }
+        }
+
+
+        $this->content = $this->render('views/products/detail.php',[
+            'product'       => $product,
+            'tag'          => $tag,
+            'category'    => $category
+        ]);
+
+        require_once 'views/layouts/main.php';
+    }
+
+
+
+
+    public function delete(){
+        
     }
 
 
@@ -83,48 +182,35 @@ class ProductController extends Controller {
                 $this->error = "Giá tiền hoặc số lượng phải là số";
             }
 
-            if ($avatar_file['error'] == 0){
-
-                foreach ($avatar_file['name'] as $avatar_name){
-                    $extension = pathinfo($avatar_name,PATHINFO_EXTENSION);
-                    $extension = strtolower($extension);
-                    $extensions[] = $extension;
-                }
-
-                $extension_array = ['jpg','png','jpge','gif'];
-                
-                foreach ($extensions as $extension){
-                    if (!in_array($extension,$extension_array)){
-                        $this->error = "Cần nhập đúng định dạng ảnh";
-                    }
-                }    
-            }
 
             $avatar = '';
+            $extensions[] = array();
+            $extension_array = ['jpg','png','jpge','gif'];
+            $dir_uploads = __DIR__ . '/../assets/uploads/product';
+            foreach ($avatar_file['tmp_name'] as $key => $file) {
+                if (!file_exists($dir_uploads)){
+                    mkdir($dir_uploads);
+                }
+                $file_name = $avatar_file['name'][$key];
+                $file_tmp = $avatar_file['tmp_name'][$key];
 
-            if (empty($this->error)){
-                if ($avatar_file['error'] == 0){
-                    $dir_uploads = __DIR__ . '/../assets/uploads/product';
+                $extension = pathinfo($file_name, PATHINFO_EXTENSION);
 
-                    foreach($extensions as $extension){
-                        $count = 1;
-                        $avatar_item = time() . $title . $count . '.' . $extension;
-                        $avatar_items[] = $avatar_item;
-                        $count++;
+                if (!in_array($extension,$extension_array)){
+                    $this->error = "Cần upload đúng định dạng ảnh";
+                }
+                else {
+                    $file_name = time() . $title . $key . '.' . $extension;
+                    move_uploaded_file($file_tmp,$dir_uploads . '/' .$file_name);
+                    
+                    if(empty($avatar)){
+                        $avatar .= $file_name;
                     }
-
-                    for ($i = 0; $i < sizeof($avatar_items) ; $i++){
-                        
-                        move_uploaded_file($avatar_file['tmp_name'][$i], $dir_uploads . '/' . $avatar_items[$i]);
-                        if ($i = 0){
-                            $avatar .= $avatar_items[$i];
-                        }
-                        else {
-                            $avatar .= '/' . $avatar_items[$i];
-                        }
+                    else {
+                        $avatar .= '/' . $file_name;
                     }
                 }
-
+            }
                 $product_model = new Product();
 
                 $product_model->setTitle($title);
@@ -154,8 +240,6 @@ class ProductController extends Controller {
                 $product_category_model->setCategory_id($category_id);
                 $is_insert_2 = $product_category_model->insert();
 
-
-
                 if ($is_insert_1 && $is_insert_2){
                     $_SESSION['success'] = "Thêm sản phẩm thành công";
                     header("Location: index.php?controller=product");
@@ -164,13 +248,7 @@ class ProductController extends Controller {
                 else {
                     $_SESSION['error'] = "Thêm sản phẩm thất bại";
                 }
-
-
-            }
-
         }
-
-
 
         $this->content = $this->render('views/products/create.php',[
             'publishers'    => $publishers,
@@ -184,7 +262,3 @@ class ProductController extends Controller {
         require_once 'views/layouts/main.php';
     }
 }
-
-
-
-?> 

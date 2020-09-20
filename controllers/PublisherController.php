@@ -9,7 +9,7 @@ class PublisherController extends Controller {
     public function index(){
 
         $params = [
-            'limit' => 10,
+            'limit' => 2,
             'query_string' => 'page',
             'controller' => 'publisher',
             'action' => 'index',
@@ -23,7 +23,7 @@ class PublisherController extends Controller {
         }
 
         if (isset($_GET['title'])){
-            $params['query_additional'] = '$title' . $_GET['title'];
+            $params['query_additional'] = '&title' . $_GET['title'];
         }
 
         $publisher_model = new Publisher();

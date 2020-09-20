@@ -64,6 +64,17 @@ class Tag extends Model
         $this->created_at = $created_at;
     }
 
+    public $str_search = '';
+     
+    function __construct()
+    {
+        parent::__construct();
+        if (isset($_GET['title']) && !empty($_GET['title'])) {
+            $this->str_search .= " AND title LIKE '%{$_GET['title']}%'";
+        }
+    }
+
+
     public function create()
     {
         $sql_insert = "INSERT INTO tags (title,`description`,`status`) VALUES (:title, :description, :status); ";
@@ -83,7 +94,7 @@ class Tag extends Model
 
     public function countTotal()
     {
-        $obj_select = $this->connection->prepare("SELECT COUNT(id) from tags;");
+        $obj_select = $this->connection->prepare("SELECT COUNT(id) from tags WHERE TRUE $this->str_search;");
         $obj_select->execute();
 
         return $obj_select->fetchColumn();
@@ -96,7 +107,7 @@ class Tag extends Model
 
         $start = ($page - 1) * $limit;
 
-        $sql_select = "SELECT * FROM tags LIMIT $start,$limit;";
+        $sql_select = "SELECT * FROM tags WHERE TRUE $this->str_search LIMIT $start,$limit;";
 
         $obj_select = $this->connection->prepare($sql_select);
 

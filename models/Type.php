@@ -64,6 +64,18 @@ class type extends Model
         $this->created_at = $created_at;
     }
 
+
+    public $str_search = '';
+     
+    function __construct()
+    {
+        parent::__construct();
+        if (isset($_GET['title']) && !empty($_GET['title'])) {
+            $this->str_search .= " AND title LIKE '%{$_GET['title']}%'";
+        }
+    }
+
+
     public function create()
     {
         $sql_insert = "INSERT INTO types (title,`description`,`status`) VALUES (:title, :description, :status); ";
@@ -81,9 +93,12 @@ class type extends Model
         return $is_insert;
     }
 
+
+
+
     public function countTotal()
     {
-        $obj_select = $this->connection->prepare("SELECT COUNT(id) from types;");
+        $obj_select = $this->connection->prepare("SELECT COUNT(id) from types WHERE TRUE $this->str_search;");
         $obj_select->execute();
 
         return $obj_select->fetchColumn();
@@ -96,7 +111,7 @@ class type extends Model
 
         $start = ($page - 1) * $limit;
 
-        $sql_select = "SELECT * FROM types LIMIT $start,$limit;";
+        $sql_select = "SELECT * FROM types WHERE TRUE $this->str_search LIMIT $start,$limit;";
 
         $obj_select = $this->connection->prepare($sql_select);
 

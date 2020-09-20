@@ -105,6 +105,20 @@ class Publisher extends Model {
         $this->updated_at = $updated_at;
     }
 
+
+    public $str_search = '';
+
+    
+    function __construct()
+    {
+        parent::__construct();
+        if (isset($_GET['title']) && !empty($_GET['title'])) {
+            $this->str_search .= " AND title LIKE '%{$_GET['title']}%'";
+        }
+    }
+
+
+
     public function insert(){
         $sql_insert = "INSERT INTO publishers (title,avatar,`description`,phone,`address`,email,status,country)
         VALUES (:title,:avatar,:description,:phone,:address,:email,:status,:country);";
@@ -213,7 +227,7 @@ class Publisher extends Model {
 
         $start = ($page - 1) * $limit;
 
-        $sql_select = "SELECT * FROM publishers LIMIT $start,$limit";
+        $sql_select = "SELECT * FROM publishers WHERE TRUE $this->str_search LIMIT $start,$limit ";
 
         $obj_select = $this->connection->prepare($sql_select);
 
@@ -225,7 +239,7 @@ class Publisher extends Model {
     }
 
     public function countTotal(){
-        $sql_get_count = "SELECT COUNT(id) FROM publishers";
+        $sql_get_count = "SELECT COUNT(id) WHERE TRUE $this->str_search FROM publishers";
 
         $obj_get_count = $this->connection->prepare($sql_get_count);
         

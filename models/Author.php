@@ -68,6 +68,17 @@ class Author extends Model {
     }
 
 
+    public $str_search = '';
+     
+    function __construct()
+    {
+        parent::__construct();
+        if (isset($_GET['title']) && !empty($_GET['title'])) {
+            $this->str_search .= " AND title LIKE '%{$_GET['title']}%'";
+        }
+    }
+
+
     public function insert(){
         
         $sql_insert = "INSERT INTO authors (title,`description`,avatar,`status`) VALUES (:title,:description,:avatar,:status);";
@@ -94,7 +105,7 @@ class Author extends Model {
         $page = $params['page'];
         $limit = $params['limit']; 
         $start = ($page - 1) * $limit;
-        $sql_select_all = "SELECT * FROM authors LIMIT $start, $limit";
+        $sql_select_all = "SELECT * FROM authors WHERE TRUE $this->str_search LIMIT $start, $limit";
 
         $obj_select_all = $this->connection->prepare($sql_select_all);
 
@@ -106,7 +117,7 @@ class Author extends Model {
     }
 
     public function countTotal(){
-        $obj_select_all = $this->connection->prepare("SELECT COUNT(id) FROM authors");
+        $obj_select_all = $this->connection->prepare("SELECT COUNT(id) FROM authors WHERE TRUE $this->str_search");
         $obj_select_all->execute();
         return $obj_select_all->fetchColumn();
     }

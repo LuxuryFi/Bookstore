@@ -1,12 +1,13 @@
 <h1>Tìm kiếm</h1>
-<form action="get">
-    <input type="hidden" name="controller" value="category"/>
+<form method="get">
+    <input type="hidden" name="controller" value="tag"/>
     <input type="hidden" name="action" value="index"/>
     <div class="form-group">
         <label for="">Nhập tên thẻ</label>
-        <input type="text" name="tag" id="tag" class="form-control">
+        <input type="text" name="title" id="tag" class="form-control" value="<?php echo isset($_GET['title']) ? $_GET['title'] : '' ?>">
     </div>
     <div class="form-group">
+
         <input type="submit" name="search" id="search" value="Tìm kiếm" class="btn btn-success">
         <a href="index.php?controller=tag" class="btn btn-secondary">Xóa filter</a>
     </div>

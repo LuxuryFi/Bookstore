@@ -10,10 +10,12 @@
 <form action="" method="GET">
     <div class="form-group">
         <label for="supplier">Nhập tên nhà phân phối</label>
-        <input type="text" name="supplier" id="supplier" class="form-control">
+        <input type="text" name="title" id="supplier" class="form-control" value="<?php echo isset($_GET['title']) ? $_GET['title'] : '' ?>">
     </div>
     <div class="form-group">
-        <input type="submit" name="search" class="btn btn-success">
+        <input type="hidden" name="controller" value="supplier">
+        <input type="hidden" name="action" value="index">
+        <input type="submit" name="search" class="btn btn-success" value="Tìm kiếm">
         <a href="index.php?controller=supplier" class="btn btn-secondary">Xóa filter</a>
     </div>
 </form>

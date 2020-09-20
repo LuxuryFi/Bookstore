@@ -19,9 +19,6 @@ class Product_category extends Model {
     }
 
     public function insert(){
-
-        
-
         $sql_insert = "INSERT INTO product_category (product_id,category_id) VALUES (:product_id, :category_id);";
 
          $obj_insert = $this->connection->prepare($sql_insert);
@@ -37,7 +34,27 @@ class Product_category extends Model {
         
         return true;
     }
+
+    public function getAllCategory(){
+        $sql_select = "SELECT categories.title FROM categories INNER JOIN product_category ON categories.id = product_category.category_id and product_id = :id
+        ;";
+
+        $arr_select = [
+            ':id' => $this->product_id
+        ];
+
+        $obj_select = $this->connection->prepare($sql_select);
+
+        $obj_select->execute($arr_select);
+
+        $categories = $obj_select->fetchAll(PDO::FETCH_ASSOC);
+
+        return $categories;
+    }
+
 }
+
+
 
 
 ?>

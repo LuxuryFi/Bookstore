@@ -33,6 +33,23 @@ class Product_tag extends Model {
 
         return true;
     }
+
+    public function getAllTag(){
+        $sql_select = "SELECT tags.title FROM tags INNER JOIN product_tag ON tags.id = product_tag.tag_id and product_id = :id
+        ;";
+
+        $arr_select = [
+            ':id' => $this->product_id
+        ];
+
+        $obj_select = $this->connection->prepare($sql_select);
+
+        $obj_select->execute($arr_select);
+
+        $tags = $obj_select->fetchAll(PDO::FETCH_ASSOC);
+
+        return $tags;
+    }
 }
 
 

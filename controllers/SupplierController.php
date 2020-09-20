@@ -202,8 +202,6 @@ class supplierController extends Controller {
             'countries' => $countries
         ]);
 
-        
-
         require_once 'views/layouts/main.php';
     }
 }

@@ -11,9 +11,11 @@
 <form action="" method="GET">
     <div class="form-group">
         <label for="title">Nhập tên danh mục</label>
-        <input type="text" name="title" class="form-control" id="title">
+        <input type="text" name="title" class="form-control" id="title" value="<?php  echo isset($_GET['title']) ? $_GET['title'] : '' ?>">
     </div>
     <div class="form-group">
+        <input type="hidden" name="controller" value="author">
+        <input type="hidden" name="action" value="index">
         <input type="submit" name="search" class="btn btn-success" value="Tìm kiếm">
         <a href="index.php?controller=author&action=index" class="btn btn-secondary">Xóa filter</a>
     </div>

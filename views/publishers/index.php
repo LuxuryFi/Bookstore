@@ -10,10 +10,12 @@
 <form action="" method="GET">
     <div class="form-group">
         <label for="publisher">Nhập tên nhà xuất bản</label>
-        <input type="text" name="publisher" id="publisher" class="form-control">
+        <input type="text" name="title" id="publisher" class="form-control" value="<?php echo isset($_GET['title']) ? $_GET['title'] : '' ?>">
     </div>
     <div class="form-group">
-        <input type="submit" name="search" class="btn btn-success">
+        <input type="hidden" name="controller" value="publisher"/>
+        <input type="hidden" name="action" value="index"/>
+        <input type="submit" name="search" class="btn btn-success" value="Tìm kiếm">
         <a href="index.php?controller=publisher" class="btn btn-secondary">Xóa filter</a>
     </div>
 </form>
@@ -68,11 +70,11 @@
                 </td>
             </tr>
         <?php endforeach; ?>
-        <?php 
-            echo (!empty($pages)) ? $pages : '';
-        ?>
+    
     <?php endif; ?>
 
 
 </table>
-
+<?php 
+            echo (!empty($pages)) ? $pages : '';
+        ?>
