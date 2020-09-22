@@ -14,19 +14,19 @@
     <tr>
         <td>Tên sản phẩm</td>
         <td>
-            <?php echo $product['id'] ?>
+            <?php echo $product['title'] ?>
         </td>
     </tr>
     <tr>
         <td>Giá</td>
         <td>
-            <?php echo $product['title'] ?>
+            <?php echo $product['price'] ?>
         </td>
     </tr>
     <tr>
         <td>Số lượng</td>
         <td>
-            <?php echo $product['id'] ?>
+            <?php echo $product['amount'] ?>
         </td>
     </tr>
     <tr>
@@ -114,9 +114,7 @@
 <a class="btn btn-primary" href="index.php?controller=product">Trở lại trang chính</a>
 <a class="btn btn-secondary" href="index.php?controller=product&action=update">Cập nhật thông tin</a>
 
-<?php if (!empty($pages)) 
-    echo $pages;
-?>
+
 
 <?php else :?>
     <?php

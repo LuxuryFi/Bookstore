@@ -36,7 +36,7 @@ class Product_category extends Model {
     }
 
     public function getAllCategory(){
-        $sql_select = "SELECT categories.title FROM categories INNER JOIN product_category ON categories.id = product_category.category_id and product_id = :id
+        $sql_select = "SELECT categories.id,categories.title FROM categories INNER JOIN product_category ON categories.id = product_category.category_id and product_id = :id
         ;";
 
         $arr_select = [

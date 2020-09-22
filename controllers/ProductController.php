@@ -52,10 +52,6 @@ class ProductController extends Controller {
 
         $products = $product_model->getAllPagination($params);
 
-
-       
-
-
         $this->content = $this->render('views/products/index.php',[
             'pages'     => $pages,
             'products'  => $products
@@ -67,7 +63,64 @@ class ProductController extends Controller {
 
     public function update(){
 
-        $this->content = $this->render('views/products/update.php');
+        $product_model = new Product();
+        
+        $product_id = $_GET['id'];
+        $product_model->setId($product_id);
+
+        $product = $product_model->getOne();
+
+        $product_tag_model = new Product_tag();
+        $product_tag_model->setProduct_id($product_id);
+        $checked_tags = $product_tag_model->getAllTag();
+
+        $product_category_model = new Product_category();
+        $product_category_model->setProduct_id($product_id);
+        $checked_categories = $product_category_model->getAllCategory();
+
+        $tag_model = new Tag();
+        $tags = $tag_model->getAll();
+
+        $category_model = new Category();
+        $categories = $category_model->getAll();
+
+        $author_model = new Author();
+        $authors = $author_model->getAll();
+
+        $publisher_model = new Publisher();
+        $publishers = $publisher_model->getAll();
+
+        $type_model = new Type();
+        $types = $type_model->getAll();
+
+        $supplier_model = new Supplier();
+        $suppliers = $supplier_model->getAll();
+
+        $avatars = explode('/', $product['avatar']);
+
+
+        if (isset($_POST['submit'])){
+
+            $title = $_POST['title'];
+            $price = isset($_POST['price']) ? $_POST['price'] : 0;
+            $amount = isset($_POST['amount']) ? $_POST['amount'] : 0;
+
+        }
+
+
+
+        $this->content = $this->render('views/products/update.php',[
+            'checked_tags'         => $checked_tags,
+            'checked_categories'   => $checked_categories,
+            'product'              => $product,
+            'publishers'           => $publishers,
+            'types'                => $types,
+            'suppliers'            => $suppliers,
+            'authors'              => $authors,
+            'tags'                 => $tags,
+            'categories'           => $categories,
+            'avatars'              => $avatars
+        ]);
 
         require_once 'views/layouts/main.php';
     }
@@ -112,8 +165,8 @@ class ProductController extends Controller {
 
 
         $this->content = $this->render('views/products/detail.php',[
-            'product'       => $product,
-            'tag'          => $tag,
+            'product'     => $product,
+            'tag'         => $tag,
             'category'    => $category
         ]);
 
@@ -124,24 +177,43 @@ class ProductController extends Controller {
 
 
     public function delete(){
-        
+        $product_id = $_GET['id'];
+
+        $product_model = new Product();
+        $product_model->setId($product_id);
+        $product_model->deleteOne();
+
+        $product_category_model = new Product_category();
+        $product_category_model->setProduct_id($product_id);
+        $product_category_model->deleteOne();
+
+
+        $product_tag_model = new Product_tag();
+        $product_tag_model->setProduct_id($product_id);
+        $product_tag_model->deleteOne();
+
+
+
     }
 
 
     public function create(){
 
         $publisher_model = new Publisher();
-        $publishers = $publisher_model->getAll();
-        $supplier_model = new Supplier();
-        $suppliers = $supplier_model->getAll();
         $type_model = new Type();
-        $types = $type_model->getAll();
         $author_model = new Author();
-        $authors = $author_model->getAll();
         $categeory_model = new Category();
-        $categories = $categeory_model->getAll();
         $tag_model = new Tag();
+        $supplier_model = new Supplier();
+
+        $suppliers = $supplier_model->getAll(); 
+        $publishers = $publisher_model->getAll(); 
+        $types = $type_model->getAll();
+        $authors = $author_model->getAll();
+        $categories = $categeory_model->getAll();
         $tags = $tag_model->getAll();
+        
+       
         
 
         if(isset($_POST['submit'])){
@@ -153,6 +225,9 @@ class ProductController extends Controller {
             print_r($_FILES);
             echo "</pre>";
 
+            echo "<pre>";
+            print_r($_POST['tag_id']);
+            echo "</pre>";
             $avatar_file = $_FILES['avatar'];
 
             // foreach ($avatar['name'] as $img){
@@ -167,9 +242,9 @@ class ProductController extends Controller {
             $author_id = $_POST['author_id'];
             $publisher_id = $_POST['publisher_id'];
             $supplier_id = $_POST['supplier_id'];
-            $type_id = $_POST['type_id'];
-            $tag_id = $_POST['tag_id'];
-            $category_id = $_POST['category_id'];
+            $type_id = isset($_POST['type_id']) ? $_POST['type_id'] : '';
+            $tag_id = isset($_POST['tag_id']) ? $_POST['tag_id'] : '';
+            $category_id = isset($_POST['category_id']) ? $_POST['category_id'] : '';
             $status = $_POST['status'];
             $seo_title = $_POST['seo_title'];
             $seo_description = $_POST['seo_description'];
@@ -195,7 +270,7 @@ class ProductController extends Controller {
                 $file_tmp = $avatar_file['tmp_name'][$key];
 
                 $extension = pathinfo($file_name, PATHINFO_EXTENSION);
-
+                $extension = strtolower($extension);
                 if (!in_array($extension,$extension_array)){
                     $this->error = "Cần upload đúng định dạng ảnh";
                 }
@@ -211,6 +286,8 @@ class ProductController extends Controller {
                     }
                 }
             }
+
+            if (empty($this->error)){
                 $product_model = new Product();
 
                 $product_model->setTitle($title);
@@ -248,6 +325,7 @@ class ProductController extends Controller {
                 else {
                     $_SESSION['error'] = "Thêm sản phẩm thất bại";
                 }
+            }
         }
 
         $this->content = $this->render('views/products/create.php',[
@@ -261,4 +339,6 @@ class ProductController extends Controller {
 
         require_once 'views/layouts/main.php';
     }
+
+
 }

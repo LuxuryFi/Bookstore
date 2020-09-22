@@ -9,11 +9,11 @@ class supplierController extends Controller {
     public function index(){
 
         $params = [
-            'limit' => 10,
-            'query_string' => 'page',
-            'controller' => 'supplier',
-            'action' => 'index',
-            'full_mode' => FALSE
+            'limit'         => 10,
+            'query_string'  => 'page',
+            'controller'    => 'supplier',
+            'action'        => 'index',
+            'full_mode'     => FALSE
         ];
 
         $page = 1;
@@ -26,22 +26,19 @@ class supplierController extends Controller {
             $params['query_additional'] = '$title' . $_GET['title'];
         }
 
-        $supplier_model = new Supplier();
-
+        $supplier_model  = new Supplier();
         $countTotal      = $supplier_model->countTotal();
         $params['total'] = $countTotal;
         $params['page']  = $page;
 
         $pagination      = new Pagination($params);
-
         $pages           = $pagination->getPagination();
-
-        $suppliers      = $supplier_model->getAllPagination($params);
+        $suppliers       = $supplier_model->getAllPagination($params);
 
         
         $this->content   = $this->render('views/suppliers/index.php',[
             'pages'      => $pages,
-            'suppliers' => $suppliers
+            'suppliers'  => $suppliers
         ]);
         require_once 'views/layouts/main.php';
     }
