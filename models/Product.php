@@ -171,6 +171,20 @@ class Product extends Model {
         
     }
 
+    public function deleteOne(){
+        $sql_delete_one = "DELETE FROM products WHERE id = :id;";
+
+        $arr_delete_one = [
+            ':id' => $this->id
+        ];
+
+        $obj_delete_one = $this->connection->prepare($sql_delete_one);
+
+        $is_delete = $obj_delete_one->execute($arr_delete_one);
+
+        return $is_delete;
+    } 
+
 
     public function getCount(){
         $sql_get_count = "SELECT count(id) FROM products WHERE TRUE $this->str_search;";
@@ -254,6 +268,47 @@ class Product extends Model {
         return $product_id;
     }
 
+    public function  updateOne(){
+        $sql_update_one = "UPDATE products SET title = :title,
+                                                price = :price,
+                                                amount = :amount,
+                                                `description` = :description,
+                                                content = :content,
+                                                publisher_id = :publisher_id,
+                                                author_id = :author_id,
+                                                supplier_id = :supplier_id,
+                                                `type_id` = :type_id,
+                                                seo_keywords = :seo_keywords,
+                                                seo_title = :seo_title,
+                                                seo_description = :seo_description,
+                                                `status` = :status,
+                                                avatar = :avatar
+                                            ";
+
+        $arr_update_one = [
+            ':title' => $this->title,
+            ':description' => $this->description,
+            ':amount' => $this->amount,
+            ':price' => $this->price,
+            ':content' => $this->content,
+            ':author_id' => $this->author_id,
+            ':supplier_id' => $this->supplier_id,
+            ':type_id' => $this->type_id,
+            ':publisher_id' => $this->publisher_id,
+            ':status' => $this->status,
+            ':avatar' => $this->avatar,
+            ':seo_keywords' => $this->seo_keywords,
+            ':seo_description' => $this->description,
+            ':seo_title' => $this->title
+        ];
+
+        $obj_update_one = $this->connection->prepare($sql_update_one);
+
+        $is_update = $obj_update_one->execute($arr_update_one);
+
+        return $is_update;
+
+    }
 
     
 

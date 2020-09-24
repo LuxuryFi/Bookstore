@@ -18,8 +18,7 @@
     <div class="form-group">
     <?php 
         $selected_disabled = '';
-        $selected_active = '';
-
+        $selected_active   = '';
         if (isset($_POST['status'])){
             switch ($_POST['status']) {
                 case 0:

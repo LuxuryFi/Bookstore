@@ -151,7 +151,7 @@
             <div class="row">
                 <?php foreach ($categories as $category) : ?>
                     <?php
-                    $checked_categories =  $checked_categories;
+                    $checked_categories = isset($_POST['category_id']) ? $_POST['category_id'] : $checked_categories;
                     $result = false;
                     foreach ($checked_categories as $checked_category) {
                         if ($category['id'] == $checked_category['id']) {

@@ -17,9 +17,11 @@ require_once 'helpers/Helper.php';
 
 
 
-class ProductController extends Controller {
+class ProductController extends Controller
+{
 
-    public function index() {
+    public function index()
+    {
 
         $product_model = new Product();
 
@@ -52,7 +54,7 @@ class ProductController extends Controller {
 
         $products = $product_model->getAllPagination($params);
 
-        $this->content = $this->render('views/products/index.php',[
+        $this->content = $this->render('views/products/index.php', [
             'pages'     => $pages,
             'products'  => $products
         ]);
@@ -61,10 +63,10 @@ class ProductController extends Controller {
     }
 
 
-    public function update(){
-
+    public function update()
+    {
         $product_model = new Product();
-        
+
         $product_id = $_GET['id'];
         $product_model->setId($product_id);
 
@@ -99,17 +101,100 @@ class ProductController extends Controller {
         $avatars = explode('/', $product['avatar']);
 
 
-        if (isset($_POST['submit'])){
+        if (isset($_POST['submit'])) {
+            $title            = $_POST['title'];
+            $price            = isset($_POST['price']) ? $_POST['price'] : 0;
+            $amount           = isset($_POST['amount']) ? $_POST['amount'] : 0;
+            $description      = $_POST['description'];
+            $content          = $_POST['content'];
+            $author_id        = $_POST['author_id'];
+            $publisher_id     = $_POST['publisher_id'];
+            $supplier_id      = $_POST['supplier_id'];
+            $type_id          = isset($_POST['type_id']) ? $_POST['type_id'] : '';
+            $tag_id           = isset($_POST['tag_id']) ? $_POST['tag_id'] : '';
+            $category_id      = isset($_POST['category_id']) ? $_POST['category_id'] : '';
+            $status           = $_POST['status'];
+            $seo_title        = $_POST['seo_title'];
+            $seo_description  = $_POST['seo_description'];
+            $seo_keywords     = $_POST['seo_keywords'];
+            $avatar_file      = $_FILES['avatar'];
 
-            $title = $_POST['title'];
-            $price = isset($_POST['price']) ? $_POST['price'] : 0;
-            $amount = isset($_POST['amount']) ? $_POST['amount'] : 0;
+            if (empty($title)) {
+                $this->error = "Cần nhập tên sản phẩm";
+            } else if (!is_numeric($amount) || !is_numeric($price)) {
+                $this->error = "Giá tiền hoặc số lượng phải là số";
+            }
 
+            $avatar = $product['avatar'];
+            $extensions = array();
+            $extension_array = ['jpg', 'png', 'jpeg', 'gif'];
+            $dir_uploads = __DIR__ . '/../assets/uploads/product';
+
+            foreach ($avatar_file['tmp_name'] as $key => $item) {
+                $file_name = $avatar_file['name'][$key];
+                $file_tmp = $avatar_file['tmp_name'][$key];
+
+                $extension = pathinfo($file_name, PATHINFO_EXTENSION);
+                $extension = strtolower($extension);
+                if (!file_exists($dir_uploads)) {
+                    mkdir($dir_uploads);
+                }
+
+                if (!in_array($file_name, $extension_array)) {
+                    $this->error = "Cần nhập đúng định dạng ảnh";
+                } else {
+                    $file_name = time() . '-' . $title . '.' . $extension;
+                    move_uploaded_file($file_tmp, $dir_uploads . '/' . $file_name);
+
+                    if (empty($avatar)) {
+                        $avatar .= $file_name;
+                    } else {
+                        $avatar .= '/' . $file_name;
+                    }
+                }
+            }
+
+            if (empty($this->error)) {
+                $product_model->setId($product_id);
+                $product_model->setTitle($title);
+                $product_model->setAmount($amount);
+                $product_model->setPrice($price);
+                $product_model->setDescription($description);
+                $product_model->setContent($content);
+                $product_model->setPublisher_id($publisher_id);
+                $product_model->setSupplier_id($supplier_id);
+                $product_model->setType_id($type_id);
+                $product_model->setAuthor_id($author_id);
+                $product_model->setSeo_decription($seo_description);
+                $product_model->setSeo_keywords($seo_keywords);
+                $product_model->setSeo_title($seo_title);
+
+                $product_tag_model->setProduct_id($product_id);
+                $product_tag_model->setTag_id($tag_id);
+                $product_category_model->setProduct_id($product_id);
+                $product_category_model->setCategory_id($category_id);
+
+
+                $is_update = $product_model->updateOne();
+                $product_tag_model->deleteOne();
+                $product_category_model->deleteOne();
+                $product_tag_model->insert();
+                $product_category_model->insert();
+
+                if ($is_update) {
+                    $_SESSION['success'] = "Cập nhật sản phẩm thành công";
+                    header("Location : index.php?controller=product&action=index");
+                    exit();
+                } else {
+                    $_SESSION['error'] = "Cập nhật sản phẩm thất bại";
+                }
+            }
         }
 
 
 
-        $this->content = $this->render('views/products/update.php',[
+
+        $this->content = $this->render('views/products/update.php', [
             'checked_tags'         => $checked_tags,
             'checked_categories'   => $checked_categories,
             'product'              => $product,
@@ -125,10 +210,11 @@ class ProductController extends Controller {
         require_once 'views/layouts/main.php';
     }
 
-    public function detail(){
+    public function detail()
+    {
 
         $product_model = new Product();
-        
+
         $product_id = $_GET['id'];
         $product_model->setId($product_id);
 
@@ -146,25 +232,23 @@ class ProductController extends Controller {
         $tag = '';
 
         foreach ($tags as $item) {
-            if (empty($tag)){
+            if (empty($tag)) {
                 $tag .= $item['title'];
-            }
-            else {
+            } else {
                 $tag .= ', ' . $item['title'];
             }
         }
 
         foreach ($categories as $item) {
-            if (empty($category)){
+            if (empty($category)) {
                 $category .= $item['title'];
-            }
-            else {
+            } else {
                 $category .= ', ' . $item['title'];
             }
         }
 
 
-        $this->content = $this->render('views/products/detail.php',[
+        $this->content = $this->render('views/products/detail.php', [
             'product'     => $product,
             'tag'         => $tag,
             'category'    => $category
@@ -176,28 +260,43 @@ class ProductController extends Controller {
 
 
 
-    public function delete(){
+    public function delete()
+    {
         $product_id = $_GET['id'];
 
         $product_model = new Product();
         $product_model->setId($product_id);
-        $product_model->deleteOne();
+
+        $product = $product_model->getOne();
+
+        $images = explode('/', $product['avatar']);
 
         $product_category_model = new Product_category();
         $product_category_model->setProduct_id($product_id);
-        $product_category_model->deleteOne();
-
-
         $product_tag_model = new Product_tag();
         $product_tag_model->setProduct_id($product_id);
-        $product_tag_model->deleteOne();
 
+        $result2 = $product_category_model->deleteOne();
+        $result3 = $product_tag_model->deleteOne();
+        $result1 = $product_model->deleteOne();
 
+        if ($result1) {
+            $_SESSION['success'] = "Xóa sản phẩm thành công";
 
+            foreach ($images as $image) {
+                unlink("assets/uploads/product/$image");
+            }
+
+            header("Location: index.php?controller=product");
+            exit();
+        } else {
+            $_SESSION['error'] = "Xóa sản phẩm thất bại";
+        }
     }
 
 
-    public function create(){
+    public function create()
+    {
 
         $publisher_model = new Publisher();
         $type_model = new Type();
@@ -206,34 +305,34 @@ class ProductController extends Controller {
         $tag_model = new Tag();
         $supplier_model = new Supplier();
 
-        $suppliers = $supplier_model->getAll(); 
-        $publishers = $publisher_model->getAll(); 
+        $suppliers = $supplier_model->getAll();
+        $publishers = $publisher_model->getAll();
         $types = $type_model->getAll();
         $authors = $author_model->getAll();
         $categories = $categeory_model->getAll();
         $tags = $tag_model->getAll();
-        
-       
-        
 
-        if(isset($_POST['submit'])){
+
+
+
+        if (isset($_POST['submit'])) {
             echo "<pre>";
             print_r($_POST);
             echo "</pre>";
 
-            echo "<pre>";
-            print_r($_FILES);
-            echo "</pre>";
+            // echo "<pre>";
+            // print_r($_FILES);
+            // echo "</pre>";
 
-            echo "<pre>";
-            print_r($_POST['tag_id']);
-            echo "</pre>";
+            // echo "<pre>";
+            // print_r($_POST['tag_id']);
+            // echo "</pre>";
             $avatar_file = $_FILES['avatar'];
 
             // foreach ($avatar['name'] as $img){
             //     echo $img . ' - ';
             // }
-            
+
             $title = $_POST['title'];
             $price = isset($_POST['price']) ? $_POST['price'] : 0;
             $amount = isset($_POST['amount']) ? $_POST['amount'] : 0;
@@ -249,21 +348,20 @@ class ProductController extends Controller {
             $seo_title = $_POST['seo_title'];
             $seo_description = $_POST['seo_description'];
             $seo_keywords = $_POST['seo_keywords'];
-            
-            if (empty($title)){
+
+            if (empty($title)) {
                 $this->error = "Cần nhập tên sản phẩm";
-            }
-            else if (!is_numeric($price) || !is_numeric($amount)){
+            } else if (!is_numeric($price) || !is_numeric($amount)) {
                 $this->error = "Giá tiền hoặc số lượng phải là số";
             }
 
 
             $avatar = '';
             $extensions[] = array();
-            $extension_array = ['jpg','png','jpge','gif'];
+            $extension_array = ['jpg', 'png', 'jpge', 'gif'];
             $dir_uploads = __DIR__ . '/../assets/uploads/product';
             foreach ($avatar_file['tmp_name'] as $key => $file) {
-                if (!file_exists($dir_uploads)){
+                if (!file_exists($dir_uploads)) {
                     mkdir($dir_uploads);
                 }
                 $file_name = $avatar_file['name'][$key];
@@ -271,23 +369,21 @@ class ProductController extends Controller {
 
                 $extension = pathinfo($file_name, PATHINFO_EXTENSION);
                 $extension = strtolower($extension);
-                if (!in_array($extension,$extension_array)){
+                if (!in_array($extension, $extension_array)) {
                     $this->error = "Cần upload đúng định dạng ảnh";
-                }
-                else {
+                } else {
                     $file_name = time() . $title . $key . '.' . $extension;
-                    move_uploaded_file($file_tmp,$dir_uploads . '/' .$file_name);
-                    
-                    if(empty($avatar)){
+                    move_uploaded_file($file_tmp, $dir_uploads . '/' . $file_name);
+
+                    if (empty($avatar)) {
                         $avatar .= $file_name;
-                    }
-                    else {
+                    } else {
                         $avatar .= '/' . $file_name;
                     }
                 }
             }
 
-            if (empty($this->error)){
+            if (empty($this->error)) {
                 $product_model = new Product();
 
                 $product_model->setTitle($title);
@@ -311,24 +407,23 @@ class ProductController extends Controller {
                 $product_tag_model->setProduct_id($product_id);
                 $product_tag_model->setTag_id($tag_id);
                 $is_insert_1 = $product_tag_model->insert();
-                
+
                 $product_category_model = new Product_category();
                 $product_category_model->setProduct_id($product_id);
                 $product_category_model->setCategory_id($category_id);
                 $is_insert_2 = $product_category_model->insert();
 
-                if ($is_insert_1 && $is_insert_2){
+                if ($is_insert_1 && $is_insert_2) {
                     $_SESSION['success'] = "Thêm sản phẩm thành công";
                     header("Location: index.php?controller=product");
                     exit();
-                }
-                else {
+                } else {
                     $_SESSION['error'] = "Thêm sản phẩm thất bại";
                 }
             }
         }
 
-        $this->content = $this->render('views/products/create.php',[
+        $this->content = $this->render('views/products/create.php', [
             'publishers'    => $publishers,
             'suppliers'     => $suppliers,
             'types'         => $types,
@@ -339,6 +434,4 @@ class ProductController extends Controller {
 
         require_once 'views/layouts/main.php';
     }
-
-
 }

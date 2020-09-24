@@ -18,6 +18,21 @@ class Product_tag extends Model {
         return $this->created_at;
     }
 
+    
+    public function deleteOne(){
+        $sql_delete_one = "DELETE FROM product_tag WHERE product_id = :id;";
+
+        $arr_delete_one = [
+            ':id' => $this->product_id
+        ];
+
+        $obj_delete_one = $this->connection->prepare($sql_delete_one);
+
+        $is_delete = $obj_delete_one->execute($arr_delete_one);
+
+        return $is_delete;
+    } 
+
     public function insert(){
         $sql_insert = "INSERT INTO product_tag (product_id,tag_id) VALUES (:product_id, :tag_id);";
         $obj_insert = $this->connection->prepare($sql_insert);
