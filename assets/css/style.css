@@ -11,16 +11,18 @@
 .images-box {
   width: 100%;
   white-space: nowrap;
+ /*  */
+  position: relative;
   overflow-x: auto;
 }
 
 .images-box .image-item {
   display: inline-block;
-  width: 20%;
-  height: 450px;
+  width: 25%;
+  height: 550px;
   border: solid 1px #000000;
-  overflow: hidden;
   position: relative;
+  overflow: hidden;
 }
 
 .images-box .image-item img {
@@ -31,9 +33,10 @@
   z-index: 3;
 }
 
-.image-item img:hover {
-  transform: scale(1.1);
-}
+/* .image-item:hover+.preview-image {
+  visibility: visible;
+  transition: ease width 2s, height 4s;
+} */
 
 .images-box .image-item .remove-btn {
   position: absolute;
@@ -55,3 +58,33 @@
 .images-box .image-item .remove-btn:hover+img {
   filter: blur(2px) grayscale(1);
 }
+
+.table td {
+  height: 25px;
+  
+}
+
+.preview-box {
+  width: 100%;
+  white-space: nowrap;
+ /*  */
+  position: relative;
+  height: 20px;
+}
+
+.preview-box .preview-image {
+  position: absolute;
+  z-index: 22;
+  visibility: hidden;
+  align-self: center;
+  border: double #000000 2px;
+  top: -200px;
+  transition: ease ;
+  left: 25%;
+}
+
+.preview-box .preview-image img {
+  height: 550px;
+}
+
+

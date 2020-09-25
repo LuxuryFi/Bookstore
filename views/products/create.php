@@ -7,7 +7,7 @@
     </div>
     <div class="form-group">
         <label for="avatar">Hình ảnh</label>
-        <input type="file" name="avatar[]" id="avatar" multiple="multifile" class="form-control" accept="image/*">
+        <input type="file" name="avatar[]" id="avatar" multiple class="form-control" accept="image/*">
     </div>
     <div class="images-box">
         

@@ -122,7 +122,7 @@ class ProductController extends Controller
             } else if (!is_numeric($amount) || !is_numeric($price)) {
                 $this->error = "Giá tiền hoặc số lượng phải là số";
             }
-            else if ($supplier_id == 0 || $publisher_id == 0 || $type_id == 0 || $author_id == 0){
+            else if ($supplier_id == 0 || $publisher_id == 0 || $type_id == 0 || $author_id == 0  || $category_id == 0 || $tag_id == 0){
                 $this->error = "Cần nhập các trường thông tin bắt buộc (Tác giả, Nhà xuất bản, ...)";
             }   
 
@@ -144,7 +144,7 @@ class ProductController extends Controller
                     if (in_array($file_name, $extension_array)) {
                         $this->error = "Cần nhập đúng định dạng ảnh";
                     } else {
-                        $file_name = time() . '-' . $title . '.' . $extension;
+                        $file_name = time() . '-' . $title . $key. '.' . $extension;
                         move_uploaded_file($file_tmp, $dir_uploads . '/' . $file_name);
                         if (empty($avatar)) {
                             $avatar .= $file_name;
@@ -316,13 +316,13 @@ class ProductController extends Controller
 
 
         if (isset($_POST['submit'])) {
-            echo "<pre>";
-            print_r($_POST);
-            echo "</pre>";
+            // echo "<pre>";
+            // print_r($_POST);
+            // echo "</pre>";
 
-            echo "<pre>";
-            print_r($_FILES);
-            echo "</pre>";
+            // echo "<pre>";
+            // print_r($_FILES);
+            // echo "</pre>";
 
             // echo "<pre>";
             // print_r($_POST['tag_id']);
@@ -341,9 +341,9 @@ class ProductController extends Controller
             $author_id = $_POST['author_id'];
             $publisher_id = $_POST['publisher_id'];
             $supplier_id = $_POST['supplier_id'];
-            $type_id = isset($_POST['type_id']) ? $_POST['type_id'] : '';
-            $tag_id = isset($_POST['tag_id']) ? $_POST['tag_id'] : '';
-            $category_id = isset($_POST['category_id']) ? $_POST['category_id'] : '';
+            $type_id = isset($_POST['type_id']) ? $_POST['type_id'] : 0; 
+            $tag_id = isset($_POST['tag_id']) ? $_POST['tag_id'] : 0; 
+            $category_id = isset($_POST['category_id']) ? $_POST['category_id']: 0; 
             $status = $_POST['status'];
             $seo_title = $_POST['seo_title'];
             $seo_description = $_POST['seo_description'];
@@ -354,7 +354,7 @@ class ProductController extends Controller
             } else if (!is_numeric($price) || !is_numeric($amount)) {
                 $this->error = "Giá tiền hoặc số lượng phải là số";
             }
-            else if ($supplier_id == 0 || $publisher_id == 0 || $type_id == 0 || $author_id == 0){
+            else if ($supplier_id == 0 || $publisher_id == 0 || $type_id == 0 || $author_id == 0  || $category_id == 0 || $tag_id == 0){
                 $this->error = "Cần nhập các trường thông tin bắt buộc (Tác giả, Nhà xuất bản, ...)";
             }   
 
@@ -363,7 +363,7 @@ class ProductController extends Controller
             $extensions[] = array();
             $extension_array = ['jpg', 'png', 'jpge', 'gif'];
             $dir_uploads = __DIR__ . '/../assets/uploads/product';
-            foreach ($avatar_file['tmp_name'] as $key => $error) {
+            foreach ($avatar_file['error'] as $key => $error) {
                 if ($error == UPLOAD_ERR_OK) {
                     if (!file_exists($dir_uploads)) {
                         mkdir($dir_uploads);
@@ -420,11 +420,11 @@ class ProductController extends Controller
 
                 if ($is_insert_1 && $is_insert_2) {
                     $_SESSION['success'] = "Thêm sản phẩm thành công";
-                    echo "<pre>";
-                    print_r($_FILES['avatar']);
-                    echo "</pre>";
-                    // header("Location: index.php?controller=product");
-                    // exit();
+                    // echo "<pre>";
+                    // print_r($_FILES['avatar']);
+                    // echo "</pre>";
+                    header("Location: index.php?controller=product");
+                    exit();
                 } else {
                     $_SESSION['error'] = "Thêm sản phẩm thất bại";
                 }

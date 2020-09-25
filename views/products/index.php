@@ -29,17 +29,23 @@
     <?php foreach($products as $key => $product) : ?>
     <tr>
         <td>
-            <?php echo $product['id'] ?>
+            <a href="index.php?controller=product&action=detail&id=<?php echo $product['id']; ?>">  
+                <?php echo $product['id'] ?>
+            </a>
         </td>
         <td>
-            <?php echo $product['title'] ?>
+            <a href="index.php?controller=product&action=detail&id=<?php echo $product['id']; ?>">
+                <?php echo $product['title'] ?>
+            </a>
         </td>
         <td>
             <?php 
                 $images = explode('/',$product['avatar']);
                 
             ?>
-            <img src="assets/uploads/product/<?php echo $images['0'] ?>" alt="" width="100">
+            <a href="index.php?controller=product&action=detail&id=<?php echo $product['id']; ?>">
+                <img src="assets/uploads/product/<?php echo $images['0'] ?>" alt="" width="100">
+            </a>
         </td>
         <td>
             <?php echo $product['price'] ?>

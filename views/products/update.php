@@ -8,7 +8,7 @@
     <form action="" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title">Tên sản phẩm</label>
-            <input type="text" name="title" id="title" class="form-control" value="<?php isset($_POST['title']) ? $_POST['title'] : $product['title'] ?>">
+            <input type="text" name="title" id="title" class="form-control" value="<?= isset($_POST['title']) ? $_POST['title'] : $product['title'] ?>">
         </div>
         <div class="form-group">
             <label for="avatar">Hình ảnh</label>
@@ -20,6 +20,7 @@
                         <div onclick="return confirm('Bạn thực sự muốn xóa?');" class="remove-btn"><i class="fa fa-times"></i></div>
                         <img src="assets/uploads/product/<?php echo $avatar?>" alt="" width="400">
                     </div>
+                    
                 <?php endforeach; ?>
             </div>
            

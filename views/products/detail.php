@@ -4,140 +4,146 @@
 
 
 
-<table class="table table-bordered">
-    <tr>
-        <td>ID</td>
-        <td>
-            <?php echo $product['id'] ?>
-        </td>
-    </tr>
-    <tr>
-        <td>Tên sản phẩm</td>
-        <td>
-            <?php echo $product['title'] ?>
-        </td>
-    </tr>
-    <tr>
-        <td>Giá</td>
-        <td>
-            <?php echo $product['price'] ?>
-        </td>
-    </tr>
-    <tr>
-        <td>Số lượng</td>
-        <td>
-            <?php echo $product['amount'] ?>
-        </td>
-    </tr>
-    <tr>
-        <td>Thẻ</td>
-        <td>
-            <?php echo $tag ?>
-        </td>
-    </tr>
-    <tr>
-        <td>Thể loại</td>
-        <td>
-            <?php echo $category ?>
-        </td>
-    </tr>
-    <tr>
-        <td>Tác giả</td>
-        <td>
-            <?php echo $product['author_title'] ?>
-        </td>
-    </tr>
-    <tr>
-        <td>Nhà xuất bản</td>
-        <td>
-            <?php echo $product['publisher_title'] ?>
-        </td>
-    </tr>
-    <tr>
-        <td>Nhà phân phối</td>
-        <td>
-            <?php echo $product['supplier_title'] ?>
-        </td>
-    </tr>
-    <tr>
-        <td>Ngày tạo</td>
-        <td>
-            <?php echo $product['created_at'] ?>
-        </td>
-    </tr>
-    <tr>
-        <td>Sửa đổi lần cuối</td>
-        <td>
-            <?php echo $product['updated_at'] ?>
-        </td>
-    </tr>
-    <tr>
-        <td>Trạng thái</td>
-        <td>
-            <?php echo Helper::GetStatus($product['status']) ?>
-        </td>
-    </tr>
-    <tr>
-        <td>Tiêu đề SEO</td>
-        <td>
-            <?php echo $product['seo_title'] ?>
-        </td>
-    </tr>
-    <tr>
-        <td>Mô tả SEO</td>
-        <td>
-            <?php echo $product['seo_description'] ?>
-        </td>
-    </tr>
-    <tr>
-        <td>Từ khóa SEO</td>
-        <td>
-            <?php echo $product['seo_keywords'] ?>
-        </td>
-    </tr>
+    <table class="table table-bordered">
+        <tr>
+            <td>ID</td>
+            <td>
+                <?php echo $product['id'] ?>
+            </td>
+        </tr>
+        <tr>
+            <td>Tên sản phẩm</td>
+            <td>
+                <?php echo $product['title'] ?>
+            </td>
+        </tr>
+        <tr>
+            <td>Giá</td>
+            <td>
+                <?php echo $product['price'] ?>
+            </td>
+        </tr>
+        <tr>
+            <td>Số lượng</td>
+            <td>
+                <?php echo $product['amount'] ?>
+            </td>
+        </tr>
+        <tr>
+            <td>Thẻ</td>
+            <td>
+                <?php echo $tag ?>
+            </td>
+        </tr>
+        <tr>
+            <td>Thể loại</td>
+            <td>
+                <?php echo $category ?>
+            </td>
+        </tr>
+        <tr>
+            <td>Tác giả</td>
+            <td>
+                <?php echo $product['author_title'] ?>
+            </td>
+        </tr>
+        <tr>
+            <td>Nhà xuất bản</td>
+            <td>
+                <?php echo $product['publisher_title'] ?>
+            </td>
+        </tr>
+        <tr>
+            <td>Nhà phân phối</td>
+            <td>
+                <?php echo $product['supplier_title'] ?>
+            </td>
+        </tr>
+        <tr>
+            <td>Ngày tạo</td>
+            <td>
+                <?php echo $product['created_at'] ?>
+            </td>
+        </tr>
+        <tr>
+            <td>Sửa đổi lần cuối</td>
+            <td>
+                <?php echo $product['updated_at'] ?>
+            </td>
+        </tr>
+        <tr>
+            <td>Trạng thái</td>
+            <td>
+                <?php echo Helper::GetStatus($product['status']) ?>
+            </td>
+        </tr>
+        <tr>
+            <td>Tiêu đề SEO</td>
+            <td>
+                <?php echo $product['seo_title'] ?>
+            </td>
+        </tr>
+        <tr>
+            <td>Mô tả SEO</td>
+            <td>
+                <?php echo $product['seo_description'] ?>
+            </td>
+        </tr>
+        <tr>
+            <td>Từ khóa SEO</td>
+            <td>
+                <?php echo $product['seo_keywords'] ?>
+            </td>
+        </tr>
 
 
-    <?php 
-        $images = explode('/',$product['avatar']);       
-    ?>
-    <tr>
-        
-        <td colspan="2">
-            <label for="">Hình ảnh</label><br>
-            <div class="images-box">
-                <?php foreach ($images as $image) :?>
-                    <div class="image-item">
-                       
-                        <img src="assets/uploads/product/<?php echo $image?>" alt="" width="400">
+        <?php
+        $images = explode('/', $product['avatar']);
+        ?>
+        <tr>
+
+            <td colspan="2">
+                <label for="">Hình ảnh</label><br>
+                <div class="preview-box">
+                    <div class="preview-image">
+                        <img src="" alt="">
                     </div>
-                <?php endforeach ?>
-            </div>
-        </td>
-    </tr>
-</table>
-<a class="btn btn-primary" href="index.php?controller=product">Trở lại trang chính</a>
-<a class="btn btn-secondary" href="index.php?controller=product&action=update&id=<?php echo $product['id'] ?>">Cập nhật thông tin</a>
+                </div>
+                <div class="images-box">
+
+                    <?php foreach ($images as $image) : ?>
+                        <div class="image-item">
+                            <img src="assets/uploads/product/<?php echo $image ?>" alt="<?php echo $product['seo_keywords'] ?>">
+                        </div>
+
+                    <?php endforeach ?>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <a class="btn btn-primary" href="index.php?controller=product">Trở lại trang chính</a>
+    <a class="btn btn-secondary" href="index.php?controller=product&action=update&id=<?php echo $product['id'] ?>">Cập nhật thông tin</a>
 
 
 
-<?php else :?>
+<?php else : ?>
     <?php
-     echo "<pre>";
-     print_r($product);
-     echo "</pre>"; 
+    echo "<pre>";
+    print_r($product);
+    echo "</pre>";
     ?>
 
-<?php
-    
-     echo $category;
-    
+    <?php
+
+    echo $category;
+
     ?>
 
-<?php
-     
-     echo $tag;
-     
-?>
+    <?php
+
+    echo $tag;
+
+    ?>
 
 
 

@@ -11,7 +11,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/css/all.min.css">
     <link rel="stylesheet" href="assets/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+   
     <link rel="stylesheet" href="assets/css/mdb.lite.min.css">
     <link rel="stylesheet" href="assets/css/mdb.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -20,6 +20,7 @@
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet" href="assets/css/style.css">     
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
