@@ -58,6 +58,8 @@ class PublisherController extends Controller {
             $avatar_file = $_FILES['avatar'];
             $country = $_POST['country'];
 
+          
+
             if (empty($title) || empty($phone) || empty($email) || empty($address)){
                 $this->error = "Cần nhập đủ các thông tin";
             }
@@ -104,6 +106,7 @@ class PublisherController extends Controller {
 
                 if ($is_insert){
                     $_SESSION['success'] = "Thêm mới thành công";
+                    
                     header("Location: index.php?controller=publisher&action=index");
                     exit();
                 }

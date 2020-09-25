@@ -269,37 +269,39 @@ class Product extends Model {
     }
 
     public function  updateOne(){
-        $sql_update_one = "UPDATE products SET title = :title,
-                                                price = :price,
-                                                amount = :amount,
-                                                `description` = :description,
-                                                content = :content,
-                                                publisher_id = :publisher_id,
-                                                author_id = :author_id,
-                                                supplier_id = :supplier_id,
-                                                `type_id` = :type_id,
-                                                seo_keywords = :seo_keywords,
-                                                seo_title = :seo_title,
+        $sql_update_one = "UPDATE products SET  title           = :title,
+                                                price           = :price,
+                                                amount          = :amount,
+                                                `description`   = :description,
+                                                content         = :content,
+                                                publisher_id    = :publisher_id,
+                                                author_id       = :author_id,
+                                                supplier_id     = :supplier_id,
+                                                `type_id`       = :type_id,
+                                                seo_keywords    = :seo_keywords,
+                                                seo_title       = :seo_title,
                                                 seo_description = :seo_description,
-                                                `status` = :status,
-                                                avatar = :avatar
+                                                `status`        = :status,
+                                                avatar          = :avatar
+                                                WHERE id        = :id
                                             ";
 
         $arr_update_one = [
-            ':title' => $this->title,
-            ':description' => $this->description,
-            ':amount' => $this->amount,
-            ':price' => $this->price,
-            ':content' => $this->content,
-            ':author_id' => $this->author_id,
-            ':supplier_id' => $this->supplier_id,
-            ':type_id' => $this->type_id,
-            ':publisher_id' => $this->publisher_id,
-            ':status' => $this->status,
-            ':avatar' => $this->avatar,
-            ':seo_keywords' => $this->seo_keywords,
-            ':seo_description' => $this->description,
-            ':seo_title' => $this->title
+            ':title'            => $this->title,
+            ':description'      => $this->description,
+            ':amount'           => $this->amount,
+            ':price'            => $this->price,
+            ':content'          => $this->content,
+            ':author_id'        => $this->author_id,
+            ':supplier_id'      => $this->supplier_id,
+            ':type_id'          => $this->type_id,
+            ':publisher_id'     => $this->publisher_id,
+            ':status'           => $this->status,
+            ':avatar'           => $this->avatar,
+            ':seo_keywords'     => $this->seo_keywords,
+            ':seo_description'  => $this->description,
+            ':seo_title'        => $this->title,
+            ':id'               =>  $this->id
         ];
 
         $obj_update_one = $this->connection->prepare($sql_update_one);

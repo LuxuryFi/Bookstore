@@ -5,6 +5,8 @@ use GuzzleHttp\Psr7\Request;
 session_start();
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 
+require_once './vendor/autoload.php';
+require_once 'helpers/Helper.php';
 
 $controller = isset($_GET['controller']) ? $_GET['controller'] : 'product';
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
@@ -25,5 +27,6 @@ $object = new $controller();
 
 $object->$action();
 
-
 ?>
+
+

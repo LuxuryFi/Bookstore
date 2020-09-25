@@ -7,6 +7,12 @@ class Helper {
     const STATUS_ACTIVE_TEXT = 'Active';
     const STATUS_DISABLED_TEXT = 'Disabled';
 
+
+    public static function dd($variable) {
+        dump($variable);
+        exit();
+    }
+
     public static function validatePhone($phone){
         $filter = filter_var($phone, FILTER_SANITIZE_NUMBER_INT);
 
@@ -288,6 +294,8 @@ class Helper {
 
 
 
+
+    
 
 
 

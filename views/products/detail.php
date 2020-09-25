@@ -112,7 +112,7 @@
     </tr>
 </table>
 <a class="btn btn-primary" href="index.php?controller=product">Trở lại trang chính</a>
-<a class="btn btn-secondary" href="index.php?controller=product&action=update">Cập nhật thông tin</a>
+<a class="btn btn-secondary" href="index.php?controller=product&action=update&id=<?php echo $product['id'] ?>">Cập nhật thông tin</a>
 
 
 

@@ -1,7 +1,5 @@
 <?php
 
-use function PHPSTORM_META\type;
-
 require_once 'controllers/Controller.php';
 require_once 'models/Product.php';
 require_once 'models/Pagination.php';
@@ -13,13 +11,9 @@ require_once 'models/Type.php';
 require_once 'models/Author.php';
 require_once 'models/Product_category.php';
 require_once 'models/Product_tag.php';
-require_once 'helpers/Helper.php';
-
-
 
 class ProductController extends Controller
 {
-
     public function index()
     {
 
@@ -50,7 +44,7 @@ class ProductController extends Controller
 
         $pages = $pagination->getPagination();
 
-        var_dump($count_total);
+
 
         $products = $product_model->getAllPagination($params);
 
@@ -78,7 +72,11 @@ class ProductController extends Controller
 
         $product_category_model = new Product_category();
         $product_category_model->setProduct_id($product_id);
-        $checked_categories = $product_category_model->getAllCategory();
+        $checked_categories = array_map(function($item) {
+            return $item['id'];
+        }, $product_category_model->getAllCategory());
+        //Helper::dd($product_category_model->getAllCategory());
+        
 
         $tag_model = new Tag();
         $tags = $tag_model->getAll();
@@ -124,35 +122,40 @@ class ProductController extends Controller
             } else if (!is_numeric($amount) || !is_numeric($price)) {
                 $this->error = "Giá tiền hoặc số lượng phải là số";
             }
+            else if ($supplier_id == 0 || $publisher_id == 0 || $type_id == 0 || $author_id == 0){
+                $this->error = "Cần nhập các trường thông tin bắt buộc (Tác giả, Nhà xuất bản, ...)";
+            }   
 
             $avatar = $product['avatar'];
-            $extensions = array();
             $extension_array = ['jpg', 'png', 'jpeg', 'gif'];
             $dir_uploads = __DIR__ . '/../assets/uploads/product';
 
-            foreach ($avatar_file['tmp_name'] as $key => $item) {
-                $file_name = $avatar_file['name'][$key];
-                $file_tmp = $avatar_file['tmp_name'][$key];
+            foreach ($avatar_file['error'] as $key => $error) {
+                if ($error == UPLOAD_ERR_OK && $error != 4) {
+                    $file_name = $avatar_file['name'][$key];
+                    $file_tmp = $avatar_file['tmp_name'][$key];
 
-                $extension = pathinfo($file_name, PATHINFO_EXTENSION);
-                $extension = strtolower($extension);
-                if (!file_exists($dir_uploads)) {
-                    mkdir($dir_uploads);
-                }
+                    $extension = pathinfo($file_name, PATHINFO_EXTENSION);
+                    $extension = strtolower($extension);
+                    if (!file_exists($dir_uploads)) {
+                        mkdir($dir_uploads);
+                    }
 
-                if (!in_array($file_name, $extension_array)) {
-                    $this->error = "Cần nhập đúng định dạng ảnh";
-                } else {
-                    $file_name = time() . '-' . $title . '.' . $extension;
-                    move_uploaded_file($file_tmp, $dir_uploads . '/' . $file_name);
-
-                    if (empty($avatar)) {
-                        $avatar .= $file_name;
+                    if (in_array($file_name, $extension_array)) {
+                        $this->error = "Cần nhập đúng định dạng ảnh";
                     } else {
-                        $avatar .= '/' . $file_name;
+                        $file_name = time() . '-' . $title . '.' . $extension;
+                        move_uploaded_file($file_tmp, $dir_uploads . '/' . $file_name);
+                        if (empty($avatar)) {
+                            $avatar .= $file_name;
+                        } else {
+                            $avatar .= '/' . $file_name;
+                        }
                     }
                 }
-            }
+            }   
+
+            
 
             if (empty($this->error)) {
                 $product_model->setId($product_id);
@@ -168,6 +171,7 @@ class ProductController extends Controller
                 $product_model->setSeo_decription($seo_description);
                 $product_model->setSeo_keywords($seo_keywords);
                 $product_model->setSeo_title($seo_title);
+                $product_model->setAvatar($avatar);
 
                 $product_tag_model->setProduct_id($product_id);
                 $product_tag_model->setTag_id($tag_id);
@@ -183,16 +187,19 @@ class ProductController extends Controller
 
                 if ($is_update) {
                     $_SESSION['success'] = "Cập nhật sản phẩm thành công";
-                    header("Location : index.php?controller=product&action=index");
-                    exit();
+                    echo "<pre>";
+                    print_r($_FILES['avatar']);
+                    echo "</pre>";
+                    // header("Location : index.php?controller=product&action=index");
+                    // exit();
                 } else {
+                    echo "<pre>";
+                    print_r($_FILES['avatar']);
+                    echo "</pre>";
                     $_SESSION['error'] = "Cập nhật sản phẩm thất bại";
                 }
             }
         }
-
-
-
 
         $this->content = $this->render('views/products/update.php', [
             'checked_tags'         => $checked_tags,
@@ -231,22 +238,17 @@ class ProductController extends Controller
         $category = '';
         $tag = '';
 
-        foreach ($tags as $item) {
-            if (empty($tag)) {
-                $tag .= $item['title'];
-            } else {
-                $tag .= ', ' . $item['title'];
-            }
-        }
 
-        foreach ($categories as $item) {
-            if (empty($category)) {
-                $category .= $item['title'];
-            } else {
-                $category .= ', ' . $item['title'];
-            }
-        }
+        $titleArr = array_map(function ($tag) {
+            return $tag['title'];
+        }, $tags);
+        $tag = implode(', ', $titleArr);
 
+
+        $titleArr = array_map(function ($category) {
+            return $category['title'];
+        }, $categories);
+        $category = implode(', ', $titleArr);
 
         $this->content = $this->render('views/products/detail.php', [
             'product'     => $product,
@@ -313,16 +315,14 @@ class ProductController extends Controller
         $tags = $tag_model->getAll();
 
 
-
-
         if (isset($_POST['submit'])) {
             echo "<pre>";
             print_r($_POST);
             echo "</pre>";
 
-            // echo "<pre>";
-            // print_r($_FILES);
-            // echo "</pre>";
+            echo "<pre>";
+            print_r($_FILES);
+            echo "</pre>";
 
             // echo "<pre>";
             // print_r($_POST['tag_id']);
@@ -354,31 +354,36 @@ class ProductController extends Controller
             } else if (!is_numeric($price) || !is_numeric($amount)) {
                 $this->error = "Giá tiền hoặc số lượng phải là số";
             }
+            else if ($supplier_id == 0 || $publisher_id == 0 || $type_id == 0 || $author_id == 0){
+                $this->error = "Cần nhập các trường thông tin bắt buộc (Tác giả, Nhà xuất bản, ...)";
+            }   
 
 
             $avatar = '';
             $extensions[] = array();
             $extension_array = ['jpg', 'png', 'jpge', 'gif'];
             $dir_uploads = __DIR__ . '/../assets/uploads/product';
-            foreach ($avatar_file['tmp_name'] as $key => $file) {
-                if (!file_exists($dir_uploads)) {
-                    mkdir($dir_uploads);
-                }
-                $file_name = $avatar_file['name'][$key];
-                $file_tmp = $avatar_file['tmp_name'][$key];
+            foreach ($avatar_file['tmp_name'] as $key => $error) {
+                if ($error == UPLOAD_ERR_OK) {
+                    if (!file_exists($dir_uploads)) {
+                        mkdir($dir_uploads);
+                    }
+                    $file_name = $avatar_file['name'][$key];
+                    $file_tmp = $avatar_file['tmp_name'][$key];
 
-                $extension = pathinfo($file_name, PATHINFO_EXTENSION);
-                $extension = strtolower($extension);
-                if (!in_array($extension, $extension_array)) {
-                    $this->error = "Cần upload đúng định dạng ảnh";
-                } else {
-                    $file_name = time() . $title . $key . '.' . $extension;
-                    move_uploaded_file($file_tmp, $dir_uploads . '/' . $file_name);
-
-                    if (empty($avatar)) {
-                        $avatar .= $file_name;
+                    $extension = pathinfo($file_name, PATHINFO_EXTENSION);
+                    $extension = strtolower($extension);
+                    if (!in_array($extension, $extension_array)) {
+                        $this->error = "Cần upload đúng định dạng ảnh";
                     } else {
-                        $avatar .= '/' . $file_name;
+                        $file_name = time() . $title . $key . '.' . $extension;
+                        move_uploaded_file($file_tmp, $dir_uploads . '/' . $file_name);
+
+                        if (empty($avatar)) {
+                            $avatar .= $file_name;
+                        } else {
+                            $avatar .= '/' . $file_name;
+                        }
                     }
                 }
             }
@@ -415,8 +420,11 @@ class ProductController extends Controller
 
                 if ($is_insert_1 && $is_insert_2) {
                     $_SESSION['success'] = "Thêm sản phẩm thành công";
-                    header("Location: index.php?controller=product");
-                    exit();
+                    echo "<pre>";
+                    print_r($_FILES['avatar']);
+                    echo "</pre>";
+                    // header("Location: index.php?controller=product");
+                    // exit();
                 } else {
                     $_SESSION['error'] = "Thêm sản phẩm thất bại";
                 }

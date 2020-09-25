@@ -5,6 +5,15 @@
 <a href="index.php?controller=product&action=create" class="btn btn-primary"><i class="fa fa-plus"></i> Thêm mới</a>
 
 <?php if (!empty($products)) : ?>
+<?php
+    echo "<pre>";
+    print_r($_POST);
+    echo "</pre>";
+
+    echo "<pre>";
+    print_r($_FILES);
+    echo "</pre>";
+?>
 
 <table class="table-bordered table">
     <tr>
@@ -30,7 +39,7 @@
                 $images = explode('/',$product['avatar']);
                 
             ?>
-            <img src="assets/uploads/product/<?php echo $images['1'] ?>" alt="" width="100">
+            <img src="assets/uploads/product/<?php echo $images['0'] ?>" alt="" width="100">
         </td>
         <td>
             <?php echo $product['price'] ?>

@@ -1,4 +1,4 @@
-<h1>Thêm mới sản phẩm</h1>
+<h1>Cập nhật sản phẩm</h1>
 
 <?php
 
@@ -8,14 +8,14 @@
     <form action="" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title">Tên sản phẩm</label>
-            <input type="text" name="title" id="title" class="form-control" value="<?php echo isset($_POST['title']) ? $_POST['title'] : $product['title'] ?>">
+            <input type="text" name="title" id="title" class="form-control" value="<?php isset($_POST['title']) ? $_POST['title'] : $product['title'] ?>">
         </div>
         <div class="form-group">
             <label for="avatar">Hình ảnh</label>
             <input type="file" name="avatar[]" id="avatar" multiple="multifile" class="form-control" accept="image/*">
             <br>
             <?php foreach ($avatars as $avatar) : ?>
-                <img src="assets/uploads/product/<?php echo  $avatar?>" alt="" width="100">
+                <img src="assets/uploads/product/<?php echo  $avatar ?>" alt="" width="100">
             <?php endforeach; ?>
         </div>
         <img src="#" id="img-preview" style="display: none" width="100" height="100" />
@@ -119,18 +119,28 @@
             <label for="tag">Thẻ</label>
             <div class="row">
                 <?php foreach ($tags as $tag) : ?>
-                    <?php
-
-                    if (isset($_POST['tag_id']))
-                        $checked_tags =  $checked_tags;
+                    <?php     
                     $result = false;
-                    foreach ($checked_tags as $checked_tag)
-                        if ($tag['id'] == $checked_tag['id']) {
-                            $result = true;
-                            break;
-                        } else {
-                            $result = false;
-                        }
+                    if (!isset($_POST['tag_id'])){
+                        foreach ($checked_tags as $checked_tag)
+                            if ($tag['id'] == $checked_tag['id']) {
+                                $result = true;
+                                break;
+                            } 
+                            else {
+                                $result = false;
+                            }
+                    }
+                    else {
+                        foreach ($_POST['tag_id'] as $checked_tag)
+                            if ($tag['id'] == $checked_tag) {
+                                $result = true;
+                                break;
+                            } 
+                            else {
+                                $result = false;
+                            }
+                    }
                     ?>
                     <?php if ($result) : ?>
                         <div class="col-sm-3">
@@ -150,29 +160,10 @@
             <label for="category">Thể loại</label>
             <div class="row">
                 <?php foreach ($categories as $category) : ?>
-                    <?php
-                    $checked_categories = isset($_POST['category_id']) ? $_POST['category_id'] : $checked_categories;
-                    $result = false;
-                    foreach ($checked_categories as $checked_category) {
-                        if ($category['id'] == $checked_category['id']) {
-                            $result = true;
-                            break;
-                        } else {
-                            $result = false;
-                        }
-                    }
-                    ?>
-                    <?php if ($result) : ?>
-                        <div class="col-sm-3">
-                            <input class="" name="category_id[]" type="checkbox" id="cate_checkbox<?php echo $category['id'] ?>" value="<?php echo $category['id'] ?>" checked>
-                            <label class="" for="cate_checkbox<?php echo $category['id'] ?>"><?php echo $category['title'] ?></label>
-                        </div>
-                    <?php else : ?>
-                        <div class="col-sm-3">
-                            <input class="" name="category_id[]" type="checkbox" id="cate_checkbox<?php echo $category['id'] ?>" value="<?php echo $category['id'] ?>">
-                            <label class="" for="cate_checkbox<?php echo $category['id'] ?>"><?php echo $category['title'] ?></label>
-                        </div>
-                    <?php endif; ?>
+                    <div class="col-sm-3">
+                        <input class="" name="category_id[]" type="checkbox" id="cate_checkbox<?=$category['id'];?>" value="<?=$category['id'];?>" <?=in_array($category['id'], $_POST['category_id'] ?? $checked_categories) ? 'checked' : null;?>>
+                        <label class="" for="cate_checkbox<?=$category['id'];?>"><?=$category['title'];?></label>
+                    </div>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -211,7 +202,7 @@
             <input type="text" class="form-control" name="seo_keywords" id="seo_keywords" value="<?php echo isset($_POST['seo_keywords']) ? $_POST['seo_keywords'] : $product['seo_keywords']  ?>">
         </div>
 
-        <input type="submit" name="submit" class="btn btn-success" value="Thêm mới">
+        <input type="submit" name="submit" class="btn btn-success" value="Cập nhật">
         <input type="reset" name="reset" class="btn btn-danger">
     </form>
 
