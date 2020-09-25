@@ -1,19 +1,25 @@
 $(document).ready(function () {
 
   function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
+    if (input.files) {
       
-      reader.onload = function (e) {
-        $('#img-preview').attr('src', e.target.result).show();
+      var fileAmount = input.files.length;
+      for (var i = 0; i < fileAmount; i++){
+        var reader = new FileReader();
+        
+        reader.onload = function (e) {
+          $($.parseHTML('<div>')).attr('class', 'image-item').append('.images-box');
+          $($.parseHTML('<img>')).attr('src', e.target.result).append('.image-item');
+        }
+        reader.readAsDataURL(input.files[i]); // convert to base64 string
       }
-      reader.readAsDataURL(input.files[0]); // convert to base64 string
+
     }
   }
 
 
     //Chọn file thì sẽ show ảnh thumbnail lên
-    $('input[type=file]').change(function () {
+    $('#avatar').on('change',function () {
         readURL(this);
     });
 

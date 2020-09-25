@@ -9,8 +9,11 @@
         <label for="avatar">Hình ảnh</label>
         <input type="file" name="avatar[]" id="avatar" multiple="multifile" class="form-control" accept="image/*">
     </div>
-    <img src="#" id="img-preview" style="display: none" width="100" height="100"/>
+    <div class="images-box">
+        
+    </div>
     <div class="form-group">
+    
         <label for="price">Giá thành</label>
         <input type="text" name="price" class="form-control" value="<?php echo isset($_POST['price']) ? $_POST['price'] : '' ?>">
     </div>

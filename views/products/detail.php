@@ -104,10 +104,14 @@
         
         <td colspan="2">
             <label for="">Hình ảnh</label><br>
-            <?php foreach ($images as $image) :?>
-                <img src="assets/uploads/product/<?php echo $image?>" alt="" width="400">
-            <?php endforeach ?>
-            
+            <div class="images-box">
+                <?php foreach ($images as $image) :?>
+                    <div class="image-item">
+                       
+                        <img src="assets/uploads/product/<?php echo $image?>" alt="" width="400">
+                    </div>
+                <?php endforeach ?>
+            </div>
         </td>
     </tr>
 </table>

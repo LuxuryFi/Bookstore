@@ -14,9 +14,15 @@
             <label for="avatar">Hình ảnh</label>
             <input type="file" name="avatar[]" id="avatar" multiple="multifile" class="form-control" accept="image/*">
             <br>
-            <?php foreach ($avatars as $avatar) : ?>
-                <img src="assets/uploads/product/<?php echo  $avatar ?>" alt="" width="100">
-            <?php endforeach; ?>
+            <div class="images-box">
+                 <?php foreach ($avatars as $avatar) : ?>
+                    <div class="image-item">
+                        <div onclick="return confirm('Bạn thực sự muốn xóa?');" class="remove-btn"><i class="fa fa-times"></i></div>
+                        <img src="assets/uploads/product/<?php echo $avatar?>" alt="" width="400">
+                    </div>
+                <?php endforeach; ?>
+            </div>
+           
         </div>
         <img src="#" id="img-preview" style="display: none" width="100" height="100" />
         <div class="form-group">
@@ -119,25 +125,22 @@
             <label for="tag">Thẻ</label>
             <div class="row">
                 <?php foreach ($tags as $tag) : ?>
-                    <?php     
+                    <?php
                     $result = false;
-                    if (!isset($_POST['tag_id'])){
+                    if (!isset($_POST['tag_id'])) {
                         foreach ($checked_tags as $checked_tag)
                             if ($tag['id'] == $checked_tag['id']) {
                                 $result = true;
                                 break;
-                            } 
-                            else {
+                            } else {
                                 $result = false;
                             }
-                    }
-                    else {
+                    } else {
                         foreach ($_POST['tag_id'] as $checked_tag)
                             if ($tag['id'] == $checked_tag) {
                                 $result = true;
                                 break;
-                            } 
-                            else {
+                            } else {
                                 $result = false;
                             }
                     }
@@ -161,8 +164,8 @@
             <div class="row">
                 <?php foreach ($categories as $category) : ?>
                     <div class="col-sm-3">
-                        <input class="" name="category_id[]" type="checkbox" id="cate_checkbox<?=$category['id'];?>" value="<?=$category['id'];?>" <?=in_array($category['id'], $_POST['category_id'] ?? $checked_categories) ? 'checked' : null;?>>
-                        <label class="" for="cate_checkbox<?=$category['id'];?>"><?=$category['title'];?></label>
+                        <input class="" name="category_id[]" type="checkbox" id="cate_checkbox<?= $category['id']; ?>" value="<?= $category['id']; ?>" <?= in_array($category['id'], $_POST['category_id'] ?? $checked_categories) ? 'checked' : null; ?>>
+                        <label class="" for="cate_checkbox<?= $category['id']; ?>"><?= $category['title']; ?></label>
                     </div>
                 <?php endforeach; ?>
             </div>
