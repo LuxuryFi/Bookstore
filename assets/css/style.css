@@ -1,3 +1,14 @@
+
+@import url('https://fonts.googleapis.com/css2?family=David+Libre');
+
+body, html {
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  font-family: 'DavidLibre';
+  
+}
+
 .main-header .sidebar-toggle:before {
   content: "";
 }
@@ -87,4 +98,41 @@
   height: 550px;
 }
 
+/* header */ 
 
+
+.main-header {
+
+  width: 100%;
+  padding: 20px 0px;
+}
+
+.bottom-header {
+  background: #d55 ;
+  width: 100%;
+  padding: 20px 0px;
+  color: #ffffff;
+}
+
+.main-bottom-list a , .main-bottom-list a:visited {
+  color: #ffffff;
+}
+
+.header-bottom-list a , .header-bottom-list a:visited {
+  color: #ffffff;
+}
+
+.header-bottom-list li {
+  margin: 0px 4% ;
+}
+
+
+.header-nav {
+  width: 80%;
+}
+
+/* header */
+
+.pagination .page-item .page-link {
+  border: 1px #2254af solid;
+}

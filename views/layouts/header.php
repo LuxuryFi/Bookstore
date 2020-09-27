@@ -12,12 +12,11 @@ if (isset($_SESSION['user'])) {
 
 ?>
 <header class="main-header">
+    
     <!-- Logo -->
-    <a href="index2.html" class="logo">
-        <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>A</b>LT</span>
+    <a href="index2.html" class="brand-link">
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Admin</b>LTE</span>
+        <span class="brand-text font-weight-light"><h3>Bookstore</h3></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -31,13 +30,13 @@ if (isset($_SESSION['user'])) {
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="assets/uploads/<?php echo $avatar; ?>" class="user-image" alt="User Image">
+                        <img src="assets/uploads/1599761434-5345.jpg" class="user-image" alt="User Image">
                         <span class="hidden-xs"><?php echo $username; ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="assets/uploads/<?php echo $avatar; ?>" class="img-circle" alt="User Image">
+                            <img src="assets/uploads/1599761434-5345.jpg" class="img-circle" alt="User Image">
 
                             <p>
                                 <?php echo $username . ' - ' . $jobs; ?>
@@ -68,7 +67,7 @@ if (isset($_SESSION['user'])) {
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="assets/uploads/<?php echo $avatar; ?>" class="img-circle" alt="User Image">
+                <img src="assets/uploads/1599761434-5345.jpg    " class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p><?php echo $username; ?></p>
