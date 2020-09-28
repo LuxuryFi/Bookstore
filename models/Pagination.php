@@ -43,7 +43,7 @@ class Pagination {
             $action     = $this->params['action'];
             $page       = $current_page -1 ;
             $prev_url   = "index.php?controller=$controller&action=$action&page=$page";
-            $prev_page  = "<li><a href='$prev_url'>Prev</a></li>";
+            $prev_page  = "<li class=\"page-item\"><a class=\"page-link\" href='$prev_url'>Prev</a></li>";
         }
         return $prev_page;
     }
@@ -57,7 +57,7 @@ class Pagination {
             $action = $this->params['action'];
             $page = $current_page + 1;
             $next_url = "index.php?controller=$controller&action=$action&page=$page";
-            $next_page = "<li><a href='$next_url'>Next</a></li>";
+            $next_page = "<li class=\"page-item\" ><a class=\"page-link\" href='$next_url'>Next</a></li>";
         }
     }
 

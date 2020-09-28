@@ -179,15 +179,18 @@ class CategoryController extends Controller {
         $category_model = new Category();
 
         $id = $_GET['id'];
-        $is_delete = $category_model->deleteOne($id);
+        $category_model->setId($id);
+        $is_delete = $category_model->deleteOne();
 
         if($is_delete){
-            $_SESSION['success'] = "Deleted";
+            $_SESSION['success'] = "Xóa danh mục thành công";
             header("Location: index.php?controller=category&action=index");
             exit();
         }
         else {
-            $_SESSION['error'] = "Delete failed";
+            $_SESSION['error'] = "Xóa thất bại";
+            header("Location: index.php?controller=category&action=index");
+            exit();
         }
     }
 

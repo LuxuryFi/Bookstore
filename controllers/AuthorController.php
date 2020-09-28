@@ -91,6 +91,8 @@ class AuthorController extends Controller {
                 }
                 else {
                     $_SESSION['error'] = "Thêm mới thất bại";    
+                    header("Location: index.php?controller=author&action=index");
+                    exit();
                  }
             }
 

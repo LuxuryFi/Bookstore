@@ -1,7 +1,7 @@
 <?php
 require_once "models/Model.php";
 
-class type extends Model
+class Type extends Model
 {
     private $id;
     private $title;

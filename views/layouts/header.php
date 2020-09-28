@@ -7,7 +7,7 @@ if (isset($_SESSION['user'])) {
     $username = $_SESSION['user']['username'];
     $jobs = $_SESSION['user']['jobs'];
     $avatar = $_SESSION['user']['avatar'];
-    $year = date('Y', strtotime($_SESSION['user']['created_at']));
+   // $year = date('Y', strtotime($_SESSION['user']['created_at']));
 }
 
 ?>
@@ -18,6 +18,7 @@ if (isset($_SESSION['user'])) {
         <!-- logo for regular state and mobile devices -->
         <span class="brand-text font-weight-light"><h3>Bookstore</h3></span>
     </a>
+    <br>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
         <!-- Sidebar toggle button-->
@@ -152,14 +153,7 @@ if (isset($_SESSION['user'])) {
 <div class="breadcrumb-wrap content-wrap content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>
-            Dashboard
-            <small>Control panel</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Dashboard</li>
-        </ol>
+        
     </section>
 </div>
 

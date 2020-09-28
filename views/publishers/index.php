@@ -24,7 +24,7 @@
 <a class="btn btn-primary" href="index.php?controller=publisher&action=create"><i class="fa fa-plus"></i> Thêm mới</a>
 
 <table class="table table-bordered">
-    <tr>
+    <tr class="thead-light">
         <th>ID</th>
         <th>Tên nhà xuất bản</th>
         <th>Ảnh đại diện</th>
@@ -70,7 +70,11 @@
                 </td>
             </tr>
         <?php endforeach; ?>
-    
+    <?php
+        if (!empty($pages)){
+            echo $pages;
+        }
+    ?>
     <?php endif; ?>
 
 

@@ -214,6 +214,22 @@ class Product extends Model {
         return $products;
     }
 
+    public function getAllPaginationHome($params){
+        $limit = $params['limit'];
+        $page = $params['page'];
+        $start = ($page - 1) * $limit;
+
+        $sql_select = "SELECT * FROM products order by id DESC LIMIT $start,$limit";
+
+        $obj_select = $this->connection->prepare($sql_select);
+
+        $obj_select->execute();
+
+        $products = $obj_select->fetchAll(PDO::FETCH_ASSOC);
+
+        return $products;
+    }
+
     public function getOne(){
 
         $sql_select_one = "SELECT products.*, a.title as author_title, s.title as supplier_title, p.title as publisher_title FROM products 

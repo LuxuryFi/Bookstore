@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="assets/css/all.min.css">
     <link rel="stylesheet" href="assets/css/AdminLTE.min.css">
    
-    <link rel="stylesheet" href="assets/css/mdb.lite.min.css">
-    <link rel="stylesheet" href="assets/css/mdb.min.css">
+    <!-- <link rel="stylesheet" href="assets/css/mdb.lite.min.css">
+    <link rel="stylesheet" href="assets/css/mdb.min.css"> -->
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="assets/css/_all-skins.min.css">
@@ -24,7 +24,12 @@
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-    <link rel="stylesheet" href="assets/css/style.css">     
+    <link rel="stylesheet" href="assets/css/admin/style.css">  
+    <style>
+        body, html {
+            font-family: Helvetica;
+        }
+    </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -58,9 +63,9 @@
 <!-- Bootstrap 3.3.7 -->
 <!-- <script src="assets/js/bootstrap.min.js"></script> -->
 <!-- MDBoostrap -->
-<script src="assets/js/mdb.min.js"></script>
+<!-- <script src="assets/js/mdb.min.js"></script> -->
 <!-- AdminLTE App -->
-<script src="assets/js/adminlte.min.js"></script>
+<!-- <script src="assets/js/adminlte.min.js"></script> -->
 <!-- Popper -->
 <script src="assets/js/popper.min.js"></script>
 <!--CKEditor -->

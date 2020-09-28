@@ -176,10 +176,10 @@ class Category extends Model {
 
     }
 
-    public function deleteOne($id){
+    public function deleteOne(){
         $sql_delete = "DELETE FROM categories WHERE id = :id";
         $arr_delete = [
-            ':id' => $id
+            ':id' => $this->id
         ];
 
         $obj_delete = $this->connection->prepare($sql_delete);

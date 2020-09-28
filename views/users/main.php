@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/mdb.lite.min.css">
-    <link rel="stylesheet" href="assets/css/mdb.min.css">
+    <!-- <link rel="stylesheet" href="assets/css/mdb.lite.min.css"> -->
+    <!-- <link rel="stylesheet" href="assets/css/mdb.min.css"> -->
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="assets/css/_all-skins.min.css">
@@ -20,21 +20,21 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <link rel="stylesheet" href="assets/css/style.css">     
+    <link href="https://fonts.googleapis.com/css2?family=David+Libre" rel="stylesheet">
+
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="">
 
     <?php require_once 'header.php';
     ?>
-
-
-
+    
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Main content -->
         <section class="content">
 <!--            Nội dung hiển thị ở đây-->
             <?php echo $this->content; ?>
-            
+             
         </section>
         <!-- /.content -->
     </div>
@@ -50,10 +50,9 @@
 <script src="assets/js/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="assets/js/jquery-ui.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="assets/js/bootstrap.min.js"></script>
+
 <!-- MDBoostrap -->
-<script src="assets/js/mdb.min.js"></script>
+<!-- <script src="assets/js/mdb.min.js"></script> -->
 <!-- AdminLTE App -->
 <!-- Popper -->
 <script src="assets/js/popper.min.js"></script>

@@ -9,7 +9,7 @@ class PublisherController extends Controller {
     public function index(){
 
         $params = [
-            'limit' => 2,
+            'limit' => 5,
             'query_string' => 'page',
             'controller' => 'publisher',
             'action' => 'index',
@@ -39,7 +39,6 @@ class PublisherController extends Controller {
         $publishers      = $publisher_model->getAllPagination($params);
 
         
-
         $this->content   = $this->render('views/publishers/index.php',[
             'pages'      => $pages,
             'publishers' => $publishers
@@ -139,6 +138,8 @@ class PublisherController extends Controller {
         }
         else {
             $_SESSION['error'] = "Xóa thất bại";
+            header("Location: index.php?controller=publisher&action=index");
+            exit();
         }
 
         $this->content = $this->render('views/publishers/detail.php');

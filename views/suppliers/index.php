@@ -24,7 +24,7 @@
 <a class="btn btn-primary" href="index.php?controller=supplier&action=create"><i class="fa fa-plus"></i> Thêm mới</a>
 
 <table class="table table-bordered">
-    <tr>
+    <tr class="thead-light">
         <th>ID</th>
         <th>Tên nhà phân phối</th>
         <th>Mô tả</th>

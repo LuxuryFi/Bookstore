@@ -1,12 +1,12 @@
 <?php 
     require_once "controllers/Controller.php";
-    require_once "models/type.php";
+    require_once "models/Type.php";
     require_once "models/Pagination.php";
 
-    class typeController extends Controller {
+    class TypeController extends Controller {
         public function index(){
             
-            $type_model = new type();
+            $type_model = new Type();
 
             $params = [
                 'limit' => 5,
@@ -57,7 +57,7 @@
                 }
 
                 if (empty($this->error)){
-                    $type_model = new type();
+                    $type_model = new Type();
 
                     $type_model->setTitle($title);
                     $type_model->setDescription($description);
@@ -96,7 +96,7 @@
         }
 
         public function update(){
-            $type_model = new type();
+            $type_model = new Type();
             $type_model->setId($_GET['id']);
 
             $type = $type_model->getOne();
@@ -112,7 +112,7 @@
                 }
 
                 if (empty($this->error)){
-                    $type_model = new type();
+                    $type_model = new Type();
                     $type_model->setId($_GET['id']);
                     $type_model->setTitle($title);
                     $type_model->setDescription($description);

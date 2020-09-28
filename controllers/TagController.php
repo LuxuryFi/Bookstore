@@ -9,7 +9,7 @@
             $tag_model = new Tag();
 
             $params = [
-                'limit' => 5,
+                'limit' => 10,
                 'query_string' => 'page',
                 'controller' => 'tag',
                 'action' => 'index',
@@ -92,6 +92,8 @@
             }
             else {
                 $_SESSION['error'] = "Xóa thất bại";
+                header("Location: index.php?controller=tag&action=index");
+                exit();
             }
         }
 

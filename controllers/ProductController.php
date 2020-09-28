@@ -31,7 +31,7 @@ class ProductController extends Controller
         }
 
         $params = [
-            'limit'         => 6,
+            'limit'         => 10,
             'total'         => $count_total,
             'action'        => 'index',
             'controller'    => 'product',

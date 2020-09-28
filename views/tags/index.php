@@ -19,18 +19,22 @@
 </a>
 <table class="table table-bordered">
     <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Created at</th>
-        <th>Updated at</th>
-        <th>Status</th>
+        <thead class="thead-light">
+            <th>ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Created at</th>
+            <th>Updated at</th>
+            <th>Status</th>
+            <th></th>
+        </thead> 
     </tr>
     
     <tr>
     <?php 
         if (!empty($abc)) : ?>
     <?php foreach ($abc as $tag) :?>
+        <div class="row">
         <td>
             <?php echo $tag['id'];  ?>
         </td>
@@ -60,6 +64,7 @@
                 <i class="fa fa-trash"></i>
             </a>
         </td>
+        </div> 
     </tr>
     <?php endforeach; ?>
     <tr>

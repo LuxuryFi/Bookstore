@@ -1,10 +1,10 @@
 <?php
 require_once 'controllers/Controller.php';
 require_once 'models/Pagination.php';
-require_once 'models/supplier.php';
+require_once 'models/Supplier.php';
 require_once 'helpers/Helper.php';
 
-class supplierController extends Controller {
+class SupplierController extends Controller {
 
     public function index(){
 
@@ -112,6 +112,8 @@ class supplierController extends Controller {
         }
         else {
             $_SESSION['error'] = "Xóa thất bại";
+            header("Location: index.php?controller=supplier&action=index");
+            exit();
         }
 
         $this->content = $this->render('views/suppliers/detail.php');
