@@ -49,12 +49,12 @@ class CategoryController extends Controller {
 
         $categories = $category_model->getAllPagination($params);
 
-        $this->content = $this->render('views/categories/index.php', [
+        $this->content = $this->render('views/admin/categories/index.php', [
             'categories' => $categories,
             'pages' => $pages
         ] );
 
-        require_once 'views/layouts/main.php';
+        require_once 'views/admin/layouts/main.php';
     }
 
     public function create(){
@@ -109,9 +109,9 @@ class CategoryController extends Controller {
         }
 
 
-        $this->content = $this->render('views/categories/create.php');
+        $this->content = $this->render('views/admin/categories/create.php');
 
-        require_once 'views/layouts/main.php';
+        require_once 'views/admin/layouts/main.php';
     }
 
     public function update() {
@@ -168,11 +168,11 @@ class CategoryController extends Controller {
             }
 
         }
-        $this->content = $this->render('views/categories/update.php', [
+        $this->content = $this->render('views/admin/categories/update.php', [
                 'category' => $category
             ]
         );
-        require_once 'views/layouts/main.php';
+        require_once 'views/admin/layouts/main.php';
     }
 
     public function delete(){
@@ -200,11 +200,11 @@ class CategoryController extends Controller {
 
         $category = $category_model->getOne($id);
 
-        $this->content = $this->render('views/categories/detail.php',[
+        $this->content = $this->render('views/admin/categories/detail.php',[
             'category' => $category
         ]);
 
-        require_once 'views/layouts/main.php';
+        require_once 'views/admin/layouts/main.php';
     }
 
 }

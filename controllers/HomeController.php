@@ -20,10 +20,10 @@
         }
 
         $params = [
-            'limit'         => 20,
+            'limit'         => 10,
             'total'         => $count_total,
             'action'        => 'index',
-            'controller'    => 'product',
+            'controller'    => 'home',
             'query_string'  => 'page',
             'page'          => isset($_GET['page']) ? $_GET['page'] : 1,
             'full_mode'     => FALSE
@@ -32,23 +32,16 @@
         $pagination = new Pagination($params);
 
         $pages = $pagination->getPagination();
-
+        
 
 
         $products = $product_model->getAllPaginationHome($params);
-
-        
-
-            $this->content = $this->render('views/homes/index.php',[
+            $this->content = $this->render('views/users/homes/index.php',[
                     'products' => $products,
                     'pages'    => $pages
             ]);
-            require_once 'views/users/main.php';
+            require_once 'views/users/layouts/main.php';
         }
-
-
-
-        
     }
 
 ?>

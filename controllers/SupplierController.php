@@ -36,11 +36,11 @@ class SupplierController extends Controller {
         $suppliers       = $supplier_model->getAllPagination($params);
 
         
-        $this->content   = $this->render('views/suppliers/index.php',[
+        $this->content   = $this->render('views/admin/suppliers/index.php',[
             'pages'      => $pages,
             'suppliers'  => $suppliers
         ]);
-        require_once 'views/layouts/main.php';
+        require_once 'views/admin/layouts/main.php';
     }
 
     public function create(){
@@ -91,10 +91,10 @@ class SupplierController extends Controller {
         }
         $countries = Helper::getCountryList();
 
-        $this->content = $this->render('views/suppliers/create.php',[
+        $this->content = $this->render('views/admin/suppliers/create.php',[
             'countries' => $countries
         ]);
-        require_once 'views/layouts/main.php';
+        require_once 'views/admin/layouts/main.php';
     }
 
     public function delete(){
@@ -116,9 +116,9 @@ class SupplierController extends Controller {
             exit();
         }
 
-        $this->content = $this->render('views/suppliers/detail.php');
+        $this->content = $this->render('views/admin/suppliers/detail.php');
 
-        require_once 'views/layouts/main.php';
+        require_once 'views/admin/layouts/main.php';
     }
 
     public function update(){
@@ -179,12 +179,12 @@ class SupplierController extends Controller {
       
         $countries = Helper::getCountryList();
 
-        $this->content = $this->render('views/suppliers/update.php',[
+        $this->content = $this->render('views/admin/suppliers/update.php',[
             'supplier' => $supplier,
             'countries' => $countries
         ]);
 
-        require_once 'views/layouts/main.php';
+        require_once 'views/admin/layouts/main.php';
     }
 
     public function detail(){
@@ -196,12 +196,12 @@ class SupplierController extends Controller {
 
         $countries = Helper::getCountryList();
 
-        $this->content = $this->render('views/suppliers/detail.php',[
+        $this->content = $this->render('views/admin/suppliers/detail.php',[
             'supplier' => $supplier,
             'countries' => $countries
         ]);
 
-        require_once 'views/layouts/main.php';
+        require_once 'views/admin/layouts/main.php';
     }
 }
 

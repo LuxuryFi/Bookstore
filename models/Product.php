@@ -298,7 +298,8 @@ class Product extends Model {
                                                 seo_title       = :seo_title,
                                                 seo_description = :seo_description,
                                                 `status`        = :status,
-                                                avatar          = :avatar
+                                                avatar          = :avatar,
+                                                updated_at      = :updated_at
                                                 WHERE id        = :id
                                             ";
 
@@ -317,6 +318,7 @@ class Product extends Model {
             ':seo_keywords'     => $this->seo_keywords,
             ':seo_description'  => $this->description,
             ':seo_title'        => $this->title,
+            ':updated_at'       => $this->updated_at,
             ':id'               =>  $this->id
         ];
 

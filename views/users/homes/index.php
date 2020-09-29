@@ -3,7 +3,7 @@
 
 <div class="row product-list">
     <?php foreach ($products as $product) :?>
-    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
         <div class="product-grid">
             <div class="product-image">
                 <?php 
@@ -16,7 +16,7 @@
                 <ul class="social">
                     <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
                     <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
-                    <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    <li><a href="" data-tip="Add to Cart" data-id="<?php echo $product['id'] ?>" class="add"><i class="fa fa-shopping-cart"></i></a></li>
                 </ul>
                 <span class="product-new-label">New</span>
                 <span class="product-discount-label">Sale</span>
@@ -47,7 +47,7 @@
     </div>
     <?php endforeach;?>
 </div>
-    
+
 <br>
 <br>
 
@@ -57,6 +57,7 @@
     }
 ?>
 
+    
 
 <?php else :?>
 

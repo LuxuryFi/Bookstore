@@ -38,11 +38,11 @@ class AuthorController extends Controller {
 
         $authors = $author_model->getAllPagination($params);
 
-        $this->content = $this->render('views/authors/index.php', [
+        $this->content = $this->render('views/admin/authors/index.php', [
             'pages' => $pages,
             'authors' => $authors
         ]);
-        require_once 'views/layouts/main.php';
+        require_once 'views/admin/layouts/main.php';
     }
 
     public function create(){
@@ -98,8 +98,8 @@ class AuthorController extends Controller {
 
         }
 
-        $this->content = $this->render('views/authors/create.php');
-        require_once 'views/layouts/main.php';
+        $this->content = $this->render('views/admin/authors/create.php');
+        require_once 'views/admin/layouts/main.php';
     }
 
 
@@ -177,11 +177,11 @@ class AuthorController extends Controller {
 
         
 
-        $this->content = $this->render('views/authors/update.php', [
+        $this->content = $this->render('views/admin/authors/update.php', [
             'author' => $author
         ]);
 
-        require_once "views/layouts/main.php";
+        require_once "views/admin/layouts/main.php";
 
     }
 
@@ -192,11 +192,11 @@ class AuthorController extends Controller {
         $author_model->setId($id);
         $author = $author_model->getOne();
 
-        $this->content = $this->render('views/authors/detail.php',[
+        $this->content = $this->render('views/admin/authors/detail.php',[
             'author' => $author
         ]);
 
-        require_once 'views/layouts/main.php';
+        require_once 'views/admin/layouts/main.php';
     }
 
     

@@ -19,7 +19,7 @@
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-    <link rel="stylesheet" href="assets/css/style.css">     
+    <link rel="stylesheet" href="assets/css/user/style.css">     
     <link href="https://fonts.googleapis.com/css2?family=David+Libre" rel="stylesheet">
 
 </head>

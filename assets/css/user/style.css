@@ -307,27 +307,29 @@ body, html {
 }
 
 .product-grid .social li a:hover:after,.product-grid .social li a:hover:before {
-  opacity:1
+  opacity:1;
 }
 
 .product-grid .product-image .product-new-label {
   font-size: 20px;
-  padding: 1px 5px;
+  padding: 1px 15px;
   color: #fff;
   background-color:#ef5777; 
   position: absolute;
-  left: 0;
-  top: 15%;
+  left: 15px;
+  border-radius: 15px;
+  top: 5%;
 }
 
 .product-grid .product-image .product-discount-label {
   font-size: 20px;
-  padding: 1px 5px;
+  padding: 1px 15px;
   color: #fff;
   background-color:#000; 
   position: absolute;
-  right:  0;
-  top: 15%;
+  right:  15px;
+  border-radius: 15px;
+  top: 5%;
 }
 
 

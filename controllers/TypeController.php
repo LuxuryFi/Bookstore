@@ -38,11 +38,11 @@
 
             $types = $type_model->getAllPagination($params);
 
-            $this->content = $this->render('views/types/index.php', [
+            $this->content = $this->render('views/admin/types/index.php', [
                 'abc' => $types,
                 'pages' => $pages
             ]);
-            require_once "views/layouts/main.php";
+            require_once "views/admin/layouts/main.php";
         }
 
         public function create(){
@@ -77,8 +77,8 @@
             }
 
 
-            $this->content = $this->render('views/types/create.php');
-            require_once "views/layouts/main.php";
+            $this->content = $this->render('views/admin/types/create.php');
+            require_once "views/admin/layouts/main.php";
         }
 
         public function delete(){
@@ -134,11 +134,11 @@
                 }
             }
 
-            $this->content = $this->render("views/types/update.php",[
+            $this->content = $this->render("views/admin/types/update.php",[
                 'type' => $type
             ]);
 
-            require_once "views/layouts/main.php";
+            require_once "views/admin/layouts/main.php";
             
 
         }
@@ -151,11 +151,11 @@
             $type_model->setId($id);
             $type = $type_model->getOne();
     
-            $this->content = $this->render('views/types/detail.php',[
+            $this->content = $this->render('views/admin/types/detail.php',[
                 'type' => $type
             ]);
     
-            require_once 'views/layouts/main.php';
+            require_once 'views/admin/layouts/main.php';
         }
 
     }

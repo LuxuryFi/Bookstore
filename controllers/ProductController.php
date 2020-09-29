@@ -48,12 +48,12 @@ class ProductController extends Controller
 
         $products = $product_model->getAllPagination($params);
 
-        $this->content = $this->render('views/products/index.php', [
+        $this->content = $this->render('views/admin/products/index.php', [
             'pages'     => $pages,
             'products'  => $products
         ]);
 
-        require_once 'views/layouts/main.php';
+        require_once 'views/admin/layouts/main.php';
     }
 
 
@@ -116,6 +116,7 @@ class ProductController extends Controller
             $seo_description  = $_POST['seo_description'];
             $seo_keywords     = $_POST['seo_keywords'];
             $avatar_file      = $_FILES['avatar'];
+            $updated_at       = date('Y-m-d H:i:s');
 
             if (empty($title)) {
                 $this->error = "Cần nhập tên sản phẩm";
@@ -172,6 +173,7 @@ class ProductController extends Controller
                 $product_model->setSeo_keywords($seo_keywords);
                 $product_model->setSeo_title($seo_title);
                 $product_model->setAvatar($avatar);
+                $product_model->setUpdated_at($updated_at);
 
                 $product_tag_model->setProduct_id($product_id);
                 $product_tag_model->setTag_id($tag_id);
@@ -201,7 +203,7 @@ class ProductController extends Controller
             }
         }
 
-        $this->content = $this->render('views/products/update.php', [
+        $this->content = $this->render('views/admin/products/update.php', [
             'checked_tags'         => $checked_tags,
             'checked_categories'   => $checked_categories,
             'product'              => $product,
@@ -214,7 +216,7 @@ class ProductController extends Controller
             'avatars'              => $avatars
         ]);
 
-        require_once 'views/layouts/main.php';
+        require_once 'views/admin/layouts/main.php';
     }
 
     public function detail()
@@ -250,13 +252,13 @@ class ProductController extends Controller
         }, $categories);
         $category = implode(', ', $titleArr);
 
-        $this->content = $this->render('views/products/detail.php', [
+        $this->content = $this->render('views/admin/products/detail.php', [
             'product'     => $product,
             'tag'         => $tag,
             'category'    => $category
         ]);
 
-        require_once 'views/layouts/main.php';
+        require_once 'views/admin/layouts/main.php';
     }
 
 
@@ -431,7 +433,7 @@ class ProductController extends Controller
             }
         }
 
-        $this->content = $this->render('views/products/create.php', [
+        $this->content = $this->render('views/admin/products/create.php', [
             'publishers'    => $publishers,
             'suppliers'     => $suppliers,
             'types'         => $types,
@@ -440,6 +442,6 @@ class ProductController extends Controller
             'tags'          => $tags
         ]);
 
-        require_once 'views/layouts/main.php';
+        require_once 'views/admin/layouts/main.php';
     }
 }

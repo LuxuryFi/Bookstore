@@ -70,8 +70,47 @@ $(document).ready(function () {
   });
 
 
+  // ajax pagination
 
-  $('.file-upload').file_upload();
+  $('.add').click(function (){
+    var product_id = $(this).attr('data-id');
+    // console.log(product_id);
 
-  $('.mdb-select').materialSelect();
+    // $.ajax({
+    //   method: get,
+    //   url: 'index.php?controller=cart&action=add',
+    //   data: {
+    //     product_id : product_id
+    //   },
+    //   success: function (data){
+    //     alert('Success');
+    //   }
+    // });
+  });
+
+
+
+
+  $('.page-item').click(function (){
+    var page = $(this).text();
+    
+    var link = 'index.php?controller=home&action=index&page=';
+    link += page;
+
+    $('.test').load(link);
+    
+  });
+
+
+
+  // end ajax pagination
+
+
+
+
+ 
+
+
+
+
 });

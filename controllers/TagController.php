@@ -38,11 +38,11 @@
 
             $tags = $tag_model->getAllPagination($params);
 
-            $this->content = $this->render('views/tags/index.php', [
+            $this->content = $this->render('views/admin/tags/index.php', [
                 'abc' => $tags,
                 'pages' => $pages
             ]);
-            require_once "views/layouts/main.php";
+            require_once "views/admin/layouts/main.php";
         }
 
         public function create(){
@@ -77,8 +77,8 @@
             }
 
 
-            $this->content = $this->render('views/tags/create.php');
-            require_once "views/layouts/main.php";
+            $this->content = $this->render('views/admin/tags/create.php');
+            require_once "views/admin/layouts/main.php";
         }
 
         public function delete(){
@@ -136,11 +136,11 @@
                 }
             }
 
-            $this->content = $this->render("views/tags/update.php",[
+            $this->content = $this->render("views/admin/tags/update.php",[
                 'tag' => $tag
             ]);
 
-            require_once "views/layouts/main.php";
+            require_once "views/admin/layouts/main.php";
             
 
         }
@@ -153,11 +153,11 @@
             $tag_model->setId($id);
             $tag = $tag_model->getOne();
     
-            $this->content = $this->render('views/tags/detail.php',[
+            $this->content = $this->render('views/admin/tags/detail.php',[
                 'tag' => $tag
             ]);
     
-            require_once 'views/layouts/main.php';
+            require_once 'views/admin/layouts/main.php';
         }
 
     }

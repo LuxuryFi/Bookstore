@@ -54,10 +54,10 @@ class Pagination {
         $total_page = $this->getTotalPage();
         if($current_page < $total_page){
             $controller = $this->params['controller'];
-            $action = $this->params['action'];
-            $page = $current_page + 1;
-            $next_url = "index.php?controller=$controller&action=$action&page=$page";
-            $next_page = "<li class=\"page-item\" ><a class=\"page-link\" href='$next_url'>Next</a></li>";
+            $action     = $this->params['action'];
+            $page       = $current_page + 1;
+            $next_url   = "index.php?controller=$controller&action=$action&page=$page";
+            $next_page  = "<li class=\"page-item\"><a class=\"page-link\" href='$next_url'>Next</a></li>";
         }
     }
 

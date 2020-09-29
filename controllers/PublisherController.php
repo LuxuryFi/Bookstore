@@ -39,11 +39,11 @@ class PublisherController extends Controller {
         $publishers      = $publisher_model->getAllPagination($params);
 
         
-        $this->content   = $this->render('views/publishers/index.php',[
+        $this->content   = $this->render('views/admin/publishers/index.php',[
             'pages'      => $pages,
             'publishers' => $publishers
         ]);
-        require_once 'views/layouts/main.php';
+        require_once 'views/admin/layouts/main.php';
     }
 
     public function create(){
@@ -117,10 +117,10 @@ class PublisherController extends Controller {
 
         $countries = Helper::getCountryList();
 
-        $this->content = $this->render('views/publishers/create.php',[
+        $this->content = $this->render('views/admin/publishers/create.php',[
             'countries' => $countries
         ]);
-        require_once 'views/layouts/main.php';
+        require_once 'views/admin/layouts/main.php';
     }
 
     public function delete(){
@@ -142,9 +142,9 @@ class PublisherController extends Controller {
             exit();
         }
 
-        $this->content = $this->render('views/publishers/detail.php');
+        $this->content = $this->render('views/admin/publishers/detail.php');
 
-        require_once 'views/layouts/main.php';
+        require_once 'views/admin/layouts/main.php';
     }
 
     public function update(){
@@ -225,12 +225,12 @@ class PublisherController extends Controller {
             }
         }
 
-        $this->content = $this->render('views/publishers/update.php',[
+        $this->content = $this->render('views/admin/publishers/update.php',[
             'publisher' => $publisher,
             'countries' => $countries
         ]);
 
-        require_once 'views/layouts/main.php';
+        require_once 'views/admin/layouts/main.php';
     }
 
     public function detail(){
@@ -242,12 +242,12 @@ class PublisherController extends Controller {
        
         $countries = Helper::getCountryList();
 
-        $this->content = $this->render('views/publishers/detail.php',[
+        $this->content = $this->render('views/admin/publishers/detail.php',[
             'publisher' => $publisher,
             'countries' => $countries
         ]);
 
-        require_once 'views/layouts/main.php';
+        require_once 'views/admin/layouts/main.php';
     }
 }
 
