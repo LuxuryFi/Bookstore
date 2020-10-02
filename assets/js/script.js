@@ -70,6 +70,24 @@ $(document).ready(function () {
   });
 
 
+  // $('.product-grid .product-image img').each(function(){
+    // var width = this.width;
+    // var height = this.height;
+
+    // if (width > height){
+    //   $(this).height(width);
+    //   $(this).width(height);
+
+    //   $(this).css('width', '100%');
+      //$(this).css('height', '100%');
+  //   }
+  // });
+  
+
+
+
+
+
   // ajax pagination
 
   $('.add').click(function (){

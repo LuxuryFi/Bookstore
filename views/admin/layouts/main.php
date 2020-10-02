@@ -33,7 +33,7 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-
+    
     <?php require_once 'header.php';
     ?>
 
@@ -42,8 +42,9 @@
         <!-- Main content -->
         <section class="content">
 <!--            Nội dung hiển thị ở đây-->
-            <?php echo $this->content; ?>
-            
+            <div class="container-fluid">
+                <?php echo $this->content; ?>
+            </div>
         </section>
         <!-- /.content -->
     </div>

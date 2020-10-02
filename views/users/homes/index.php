@@ -10,8 +10,8 @@
                     $avatars = explode('/',$product['avatar']);
                 ?>
                 <a href="">
-                    <img class="pic1 img-responsive" src="assets/uploads/product/<?php echo $avatars[0]?>" alt="">
-                    <img class="pic2 img-responsive" src="assets/uploads/product/<?php echo $avatars[1]?>" alt="">
+                    <img class="pic1 img-responsive img-fluid" src="assets/uploads/product/<?php echo $avatars[0]?>" alt="">
+                    <img class="pic2 img-responsive img-fluid" src="assets/uploads/product/<?php echo $avatars[1]?>" alt="">
                 </a>
                 <ul class="social">
                     <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>

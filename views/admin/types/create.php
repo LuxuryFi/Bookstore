@@ -35,7 +35,7 @@
     </div>
     
     <div class="form-group">
-        <input type="submit" name="submit" class="btn btn-primary" value="Save">
+        <input type="submit" name="submit" class="btn btn-primary" value="Thêm mơi">
         <input type="reset" name="reset" class="btn btn-secondary" value="Reset">
     </div>
 

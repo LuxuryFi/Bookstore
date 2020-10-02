@@ -113,7 +113,7 @@ if (isset($_SESSION['user'])) {
             </li>
             <li>
                 <a href="index.php?controller=author&action=index">
-                    <i class="fa fa-users"></i> <span>Quản tác giả</span>
+                    <i class="fa fa-user"></i> <span>Quản tác giả</span>
                     <span class="pull-right-container">
               <!--<small class="label pull-right bg-green">new</small>-->
             </span>
@@ -138,6 +138,14 @@ if (isset($_SESSION['user'])) {
             <li>
                 <a href="index.php?controller=type&action=index">
                     <i class="fa fa-hashtag"></i> <span>Quản lý loại</span>
+                    <span class="pull-right-container">
+              <!--<small class="label pull-right bg-green">new</small>-->
+            </span>
+                </a>
+            </li>
+            <li>
+                <a href="index.php?controller=user&action=index">
+                    <i class="fa fa-users"></i> <span>Quản lý người dùng</span>
                     <span class="pull-right-container">
               <!--<small class="label pull-right bg-green">new</small>-->
             </span>
