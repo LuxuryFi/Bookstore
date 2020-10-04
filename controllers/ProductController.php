@@ -360,7 +360,6 @@ class ProductController extends Controller
                 $this->error = "Cần nhập các trường thông tin bắt buộc (Tác giả, Nhà xuất bản, ...)";
             }   
 
-
             $avatar = '';
             $extensions[] = array();
             $extension_array = ['jpg', 'png', 'jpge', 'gif'];

@@ -22,11 +22,11 @@
                 <span class="product-discount-label">Sale</span>
             </div>
             <ul class="rating">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star fa-xs"></i></li>
+                <li><i class="fa fa-star fa-xs"></i></li>
+                <li><i class="fa fa-star fa-xs"></i></li>
+                <li><i class="fa fa-star fa-xs"></i></li>
+                <li><i class="fa fa-star fa-xs"></i></li>
             </ul>
             <div class="product-content">
                 <h3 class="title">
@@ -35,12 +35,12 @@
                     </a>
                 </h3>
                 <div class="price">
-                    <?php echo $product['price'] ?>
+                    $<?php echo $product['price'] ?>
                     <span></span>
                 </div>
-                <div class="add-to-cart">
+                <!-- <div class="add-to-cart">
                     <a class="" href=""><i class="fa fa-plus">Add to cart</i></a>
-                </div>
+                </div> -->
                 
             </div>
         </div>

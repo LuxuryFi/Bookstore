@@ -1,7 +1,7 @@
 
 <?php 
 
-
+/*
 
 INSERT INTO tags (title,`description`,`status`) 
 VALUES ('Adventure', '', 1),
@@ -57,7 +57,7 @@ VALUES ('Adventure', '', 1),
 
 
 
-
+*/
 
 
 
