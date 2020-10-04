@@ -21,7 +21,6 @@ class ProductController extends Controller
 
         $count_total = $product_model->getCount();
 
-
         $query_additional = '';
         if (isset($_GET['title'])) {
             $query_additional .= '&title=' . $_GET['title'];

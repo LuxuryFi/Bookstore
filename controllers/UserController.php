@@ -259,14 +259,17 @@ class UserController extends Controller {
             $user = $user_model->loginCheck();
 
             if (!empty($user)){
-                if ($user['role'] == 0){
-                    
+                if ($user['roles'] == 1){
+                    header("Location: index.php");
+                    exit();
+                }
+                else if ($user['roles'] == 2){
+                    header("Location: index.php?controller=product&action=index");
+                    exit();
                 }
             }
         }
-
-
-        $this->content = $this->render('views/users/users/login.php');
+        $this->content = $this->render('views/login.php');
         require_once 'views/admin/layouts/main.php';
     }
 
