@@ -245,34 +245,7 @@ class UserController extends Controller {
         require_once 'views/admin/layouts/main.php';
     }
     
-    public function login(){
-
-        if (isset($_POST['login'])){
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-
-
-            $user_model = new User();
-            $user_model->setUsername($username);
-            $user_model->setPassword($password);
-
-            $user = $user_model->loginCheck();
-
-            if (!empty($user)){
-                if ($user['roles'] == 1){
-                    header("Location: index.php");
-                    exit();
-                }
-                else if ($user['roles'] == 2){
-                    header("Location: index.php?controller=product&action=index");
-                    exit();
-                }
-            }
-        }
-        $this->content = $this->render('views/login.php');
-        require_once 'views/admin/layouts/main.php';
-    }
-
+    
     public function register(){
         $this->content = $this->render('views/users/users/register.php');
         require_once 'views/admin/layouts/main.php';

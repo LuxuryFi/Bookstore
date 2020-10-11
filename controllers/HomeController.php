@@ -5,8 +5,9 @@
 
     class HomeController extends Controller {
         
+
         public function index() {
-            $product_model = new Product();
+        $product_model = new Product();
 
         $count_total = $product_model->getCount();
 

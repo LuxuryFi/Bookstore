@@ -34,8 +34,9 @@
                     </button>
                 </div>
                 <div class="col-12">
-                    <a href="index.php?controller=user&action=login" class="btn btn-outline-light">Đăng nhập</a>
-                    <a href="index.php?controller=user&action=register" class="btn btn-outline-light">Đăng ký</a>
+                    <a href="index.php?controller=login&action=login" class="btn btn-outline-light">Đăng nhập</a>
+                    <a href="index.php?controller=login&action=register" class="btn btn-outline-light">Đăng ký</a>
+                    <a href="index.php?controller=login&action=logout" class="btn btn-outline-light">Đăng xuất</a>
                 </div>
             </div>
         </div>
