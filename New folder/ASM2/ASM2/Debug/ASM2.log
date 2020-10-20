@@ -1,0 +1,8 @@
+﻿  ManageSystem.cpp
+E:\Greenwich\1651\ASM2\ASM2\ManageSystem.cpp(68,20): warning C4018: '<': signed/unsigned mismatch
+E:\Greenwich\1651\ASM2\ASM2\ManageSystem.cpp(85,20): warning C4018: '<': signed/unsigned mismatch
+E:\Greenwich\1651\ASM2\ASM2\ManageSystem.cpp(104,20): warning C4018: '<': signed/unsigned mismatch
+E:\Greenwich\1651\ASM2\ASM2\ManageSystem.cpp(128,20): warning C4018: '<': signed/unsigned mismatch
+E:\Greenwich\1651\ASM2\ASM2\ManageSystem.cpp(142,20): warning C4018: '<': signed/unsigned mismatch
+E:\Greenwich\1651\ASM2\ASM2\ManageSystem.cpp(150,20): warning C4018: '<': signed/unsigned mismatch
+  ASM2.vcxproj -> E:\Greenwich\1651\ASM2\Debug\ASM2.exe
