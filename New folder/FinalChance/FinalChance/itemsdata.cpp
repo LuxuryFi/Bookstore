@@ -49,3 +49,8 @@ void ItemsData::updateItem(const string& name, const float& price, const string&
 	}
 }
 
+void ItemsData::setPrices(vector<float> prices, vector<string> statuss)
+{
+	this->prices = prices;
+	this->statuss = statuss;
+}

@@ -19,11 +19,11 @@ void ItemSystem::doTask(const int& choice)
 	switch (choice)
 	{
 
-	case 1: addItem();           break;
-	case 2: changeName();          break;
-	case 3: secretaryView();           break;
+	case 1: addItem();			  break;
+	case 2: changeName();         break;
+	case 3: secretaryView();      break;
 	case 4: ownerView();          break;
-	case 5: bidderView();                break;
+	case 5: bidderView();         break;
 	default: cout << "Invalid choice: " << endl;
 	}
 }

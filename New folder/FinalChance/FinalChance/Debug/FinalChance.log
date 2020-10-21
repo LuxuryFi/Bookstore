@@ -1,9 +1,5 @@
-﻿  FinalChance.cpp
-  itemsobserver.cpp
-E:\Greenwich\1651\FinalChance\FinalChance\itemsobserver.cpp(20,20): warning C4018: '<': signed/unsigned mismatch
-E:\Greenwich\1651\FinalChance\FinalChance\itemsobserver.cpp(30,20): warning C4018: '<': signed/unsigned mismatch
-  itemsystem.cpp
-  MenuProgram.cpp
-  Generating Code...
-E:\Greenwich\1651\FinalChance\FinalChance\itemsobserver.cpp(43,20): warning C4018: '<': signed/unsigned mismatch
-  FinalChance.vcxproj -> E:\Greenwich\1651\FinalChance\Debug\FinalChance.exe
+﻿  itemsobserver.cpp
+C:\xampp\htdocs\Bookstore\New folder\FinalChance\FinalChance\itemsobserver.cpp(20,20): warning C4018: '<': signed/unsigned mismatch
+C:\xampp\htdocs\Bookstore\New folder\FinalChance\FinalChance\itemsobserver.cpp(30,20): warning C4018: '<': signed/unsigned mismatch
+C:\xampp\htdocs\Bookstore\New folder\FinalChance\FinalChance\itemsobserver.cpp(43,20): warning C4018: '<': signed/unsigned mismatch
+  FinalChance.vcxproj -> C:\xampp\htdocs\Bookstore\New folder\FinalChance\Debug\FinalChance.exe

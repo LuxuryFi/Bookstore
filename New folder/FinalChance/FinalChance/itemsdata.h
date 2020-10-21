@@ -11,6 +11,7 @@ public:
 	vector<string> getNames() const;
 	vector<float> getPrices() const;
 	vector<string> getStatus() const;
+	void setPrices(vector<float> prices, vector<string> status);
 
 	void addItems(const string& name, const float& prices, const string& status);
 	void updateItem(const string& name,const float& prices, const string& status);
